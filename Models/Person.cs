@@ -8,9 +8,13 @@ namespace Healt_Clinict.obj.Models
 
         public string LastName { get; set; }
 
+        public int Age { get; set; }
+
         public string TypeDocument { get; set; }
 
-        public int NumberDocument { get; set; }
+        public required String NumberDocument { get; set; }
+
+        public string Email { get; set; }
 
         public string PhoneNumber { get; set; } 
         
