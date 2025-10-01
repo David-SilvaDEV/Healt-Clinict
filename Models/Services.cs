@@ -1,22 +1,27 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using Healt_Clinict.obj.Models;
 
 namespace Healt_Clinict.Models;
 
 public class Services
 {
+    // Lista en memoria para poder buscar clientes al registrar solo mascota
+    private readonly List<Customer> _customers = new();
 
     public void Interface(string sectionName)
     {
         Console.Clear();
         Console.WriteLine($"-[section of {sectionName}]-");
-        
+
         Console.WriteLine("----------------------------------");
     }
     public void RegisterCustomer()
     {
-        
+
         Interface("Register Customer");
-        
+
 
 
         Console.WriteLine("Write the client's name: ");
@@ -70,10 +75,18 @@ public class Services
             PhoneNumber = phoneNumber,
             Pets = new List<Pet>()
         };
+
+        // Registrar la mascota y asociarla al cliente creado
+        Pet newPet = RegisterPet();
+        newPet.Owner = NewCustomer;
+        NewCustomer.Pets.Add(newPet);
+
+        // Guardar el cliente para búsquedas posteriores (Registeronlypet)
+        _customers.Add(NewCustomer);
     }
 
 
-    public void RegisterPet()
+    public Pet RegisterPet()
     {
         Interface("Register Pet");
         Console.WriteLine("Enter the pet's name: ");
@@ -112,19 +125,43 @@ public class Services
         Console.WriteLine("Enter the symptoms of the animal: ");
         string symptoms = Console.ReadLine() ?? "";
 
-        Pet newPet = new Pet
-        {
-            Name = name,
-            TypeAnimal = typeAnimal,
-            Sex = sex,
-            Age = age,
-            Color = color,
-            Weight = weight,
-            Symptoms = symptoms,
 
-        }
+        // Crear usando el constructor que requiere parámetros
+        Pet newPet = new Pet(name, typeAnimal, sex, age, color, weight, symptoms);
+
+
+        // devolver la mascota para que el llamador la asigne al cliente
+        return newPet;
     }
 
+    public void Registeronlypet()
+    {
+        Interface("Register Pet");
+        Console.WriteLine("Write the identification number (document number) to which the pet belongs:");
+        string idNumber = Console.ReadLine() ?? "";
+        Console.WriteLine("Write the name of the pet owner (name, last name or full name): ");
+        string ownerName = Console.ReadLine() ?? "";
 
+        // Buscar cliente que coincida en id y en nombre (Name o LastName o "Name LastName")
+        var customer = _customers.FirstOrDefault(c =>
+            !string.IsNullOrEmpty(c.NumberDocument) &&
+            c.NumberDocument.Equals(idNumber, StringComparison.OrdinalIgnoreCase) &&
+            (
+                c.Name.Equals(ownerName, StringComparison.OrdinalIgnoreCase) ||
+                c.LastName.Equals(ownerName, StringComparison.OrdinalIgnoreCase) ||
+                $"{c.Name} {c.LastName}".Equals(ownerName, StringComparison.OrdinalIgnoreCase)
+            )
+        );
 
+        if (customer == null)
+        {
+            Console.WriteLine("No customer found with that ID and name. Please verify the details or create a new one first.");
+            return;
+        }
+
+        Pet newPet = RegisterPet();
+        newPet.Owner = customer;
+        customer.Pets.Add(newPet);
+        Console.WriteLine("Pet registered and associated with the client correctly.");
+    }
 }

@@ -1,0 +1,5 @@
+c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.AssemblyInfoInputs.cache
+c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.AssemblyInfo.cs
+c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.csproj.CoreCompileInputs.cache
+c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.sourcelink.json
