@@ -128,7 +128,7 @@ public class ServicesMenu
                 customerManager.viewcustomerinformation();
                 break;
             case "2":
-                
+                Services.ShowAllPets();
                 break;
             case "3":
                 Console.WriteLine("View all employees");
