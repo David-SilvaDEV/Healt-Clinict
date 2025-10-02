@@ -9,7 +9,7 @@ namespace Healt_Clinict.Models;
 
 public class Services
 {
-    
+
 
     // Lista en memoria para poder buscar clientes al registrar solo mascota
     public static List<Customer> _customers = new()
@@ -93,7 +93,7 @@ public class Services
 
 };
 
-    public  void Interface(string sectionName)
+    public void Interface(string sectionName)
     {
         Console.Clear();
         Console.WriteLine($"-[section of {sectionName}]-");
@@ -311,6 +311,26 @@ public class Services
         foreach (var pet in sortedPets)
         {
             Console.WriteLine($"- Name: {pet.Name} | Type: ({pet.TypeAnimal}), Age: ({pet.Age} years old), Owner: {pet.Owner.Name}");
+        }
+    }
+    
+    public void ShowAllPets()
+    {
+        Interface("All Registered Pets");
+
+        var allPets = Services._customers
+            .SelectMany(c => c.Pets);
+
+        if (!allPets.Any())
+        {
+            Console.WriteLine("No pets registered.");
+            return;
+        }
+
+        Console.WriteLine("List of all registered pets:");
+        foreach (var pet in allPets)
+        {
+            Console.WriteLine($"- Name: {pet.Name} | Type: ({pet.TypeAnimal}), Age: ({pet.Age} years old), Owner: {pet.Owner.Name} {pet.Owner.NumberDocument}");
         }
     }
 }

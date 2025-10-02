@@ -7,8 +7,8 @@ Services services = new Services();
 CustomerManager customerManager = new CustomerManager();
 ServicesMenu servicesMenu = new ServicesMenu();
 
-servicesMenu.MainMenu();
+//servicesMenu.MainMenu();
 
-//services.FilterPetAlfabeticName();
+services.FilterPetAlfabeticName();
 
 //customerManager.viewcustomerinformation();

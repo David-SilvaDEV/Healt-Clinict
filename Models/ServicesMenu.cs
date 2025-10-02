@@ -112,5 +112,36 @@ public class ServicesMenu
         }
     }
 
+    public void ShowInformation ()
+    {
+        Services.Interface(" Information");
+        Console.WriteLine("[2] -View all pets");
+        Console.WriteLine("[3] -View pet by type");
+        Console.WriteLine("[4] -View pets by age (oldest to youngest)");
+        Console.WriteLine("[5] -View pets alphabetically by name");
+        Console.WriteLine("[6] -Return to main menu");
+
+        string answer = Console.ReadLine() ?? "";
+        switch (answer)
+        {
+            case "1":
+                customerManager.viewcustomerinformation();
+                break;
+            case "2":
+                
+                break;
+            case "3":
+                Console.WriteLine("View all employees");
+                break;
+            case "4":
+                MainMenu();
+                break;
+            default:
+                Console.WriteLine("Invalid option. Please try again.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                break;
+        }
+    }
 
 }
