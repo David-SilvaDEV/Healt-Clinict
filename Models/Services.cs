@@ -3,12 +3,14 @@ using System.Linq;
 using System.Collections.Generic;
 using Healt_Clinict.obj.Models;
 using System.Runtime.CompilerServices;
+using System.ComponentModel.DataAnnotations;
 
 namespace Healt_Clinict.Models;
 
 public class Services
-{
+{       
     
+
     // Lista en memoria para poder buscar clientes al registrar solo mascota
     public static List<Customer> _customers = new()
 {
@@ -87,8 +89,8 @@ public class Services
             new Pet("Rocky", "Perro", "Macho", 7, "Café", "25kg", "Dolor en la pata", null!)
         }
     }
-    
-   
+
+
 };
 
     public void Interface(string sectionName)
@@ -250,9 +252,36 @@ public class Services
 
 
     //--------------------------------------------------------------------------------------------------------------------
+    // FILTRADOS----------------------------------
 
-    
 
+    public void FilterPetType()
+    {
+        Interface("Filter Pets by Type");
+
+        // Mostrar los tipos únicos
+        Console.WriteLine("Types of registered animals:");
+        foreach (var pet in Services._customers.SelectMany(c => c.Pets).DistinctBy(p => p.TypeAnimal))
+        {
+            Console.WriteLine($"- {pet.TypeAnimal}");
+        }
+
+        Console.WriteLine("Enter the type of animal to filter: ");
+        string typeAnimal = Console.ReadLine() ?? "";
+
+        // Filtrar y mostrar todas las mascotas de ese tipo
+        var filteredPets = Services._customers
+            .SelectMany(c => c.Pets)
+            .Where(p => p.TypeAnimal.Equals(typeAnimal, StringComparison.OrdinalIgnoreCase));
+
+        Console.WriteLine($"\nPets of type '{typeAnimal}':");
+        foreach (var pet in filteredPets)
+        {
+            Console.WriteLine($"- Name: {pet.Name} | ({pet.Age} years old) | Symptoms: ({pet.Symptoms}), Owner: {pet.Owner.Name} {pet.Owner.LastName} ");
+        }
+        Console.WriteLine("--------------------------------------------");
+
+    }   
 
 
 }

@@ -108,13 +108,49 @@ public class CustomerManager
                             Console.WriteLine($"Type: {pet.TypeAnimal} | Name: {pet.Name}, | Age: {pet.Age}, | Symptoms: {pet.Symptoms}");
                             Console.WriteLine("----------------------------------------");
                         }
-                        
+
                     }
                     return;
+
                 }
             }
         }
     }
 
+
+    public void DeleteCustomer()
+    {
+        Services.Interface(" Delete Customer");
+
+        if (Services._customers == null || Services._customers.Count == 0)
+        {
+            Console.WriteLine("No customers registered.");
+            return;
+        }
+
+        else
+        {
+            Console.WriteLine("write the client's document number to delete: ");
+            string documentNumber = Console.ReadLine() ?? "";
+            Console.WriteLine("write the type of client document: ");
+            string typeDocument = Console.ReadLine() ?? "";
+            foreach (var customer in Services._customers)
+            {
+                if (customer.NumberDocument.Equals(documentNumber) && customer.TypeDocument.Equals(typeDocument))
+
+                {
+                    Services._customers.Remove(customer);
+                    Console.WriteLine("Customer deleted successfully.");
+                    return;
+                }
+
+                else
+                {
+                    Console.WriteLine("Customer not found.");
+                    return;
+                }
+            }
+        }
+    }
 
 }

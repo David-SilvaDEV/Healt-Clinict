@@ -22,6 +22,6 @@ static void MainMenu()
     }
 }
 
+services.FilterPetType();
 
-
-customerManager.viewcustomerinformation();
+//customerManager.viewcustomerinformation();
