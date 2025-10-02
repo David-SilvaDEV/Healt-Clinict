@@ -96,10 +96,10 @@ public class ServicesMenu
                 ShowInformationPets();
                 break;
             case "3":
-                Console.WriteLine("Update pet information");
+                Services.UpdatePet();
                 break;
             case "4":
-                Services.deletePet();
+                Services.DeletePet();
                 break;
             case "5":
                 MainMenu();
