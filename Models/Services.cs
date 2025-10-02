@@ -8,12 +8,11 @@ namespace Healt_Clinict.Models;
 
 public class Services
 {
-
+    
     // Lista en memoria para poder buscar clientes al registrar solo mascota
-    private List<Customer> _customers = new()
-    {
-
-     new Customer
+    public static List<Customer> _customers = new()
+{
+    new Customer
     {
         Id = Guid.NewGuid(),
         Name = "Carlos",
@@ -22,7 +21,11 @@ public class Services
         TypeDocument = "CC",
         NumberDocument = "1002456789",
         Email = "carlos.ramirez@example.com",
-        PhoneNumber = "3004567890"
+        PhoneNumber = "3004567890",
+        Pets = new List<Pet>()
+        {
+            new Pet("Firulais", "Perro", "Macho", 3, "Marrón", "15kg", "Sano",null! ) // asignaremos Owner luego
+        }
     },
     new Customer
     {
@@ -33,7 +36,11 @@ public class Services
         TypeDocument = "CC",
         NumberDocument = "1003987654",
         Email = "laura.gomez@example.com",
-        PhoneNumber = "3019876543"
+        PhoneNumber = "3019876543",
+        Pets = new List<Pet>()
+        {
+            new Pet("Michi", "Gato", "Hembra", 2, "Blanco", "4kg", "Resfriado leve", null!)
+        }
     },
     new Customer
     {
@@ -44,7 +51,11 @@ public class Services
         TypeDocument = "TI",
         NumberDocument = "1122334455",
         Email = "andres.torres@example.com",
-        PhoneNumber = "3021234567"
+        PhoneNumber = "3021234567",
+        Pets = new List<Pet>()
+        {
+            new Pet("Rex", "Perro", "Macho", 5, "Negro", "20kg", "Cojea", null!)
+        }
     },
     new Customer
     {
@@ -55,7 +66,11 @@ public class Services
         TypeDocument = "CC",
         NumberDocument = "1005678912",
         Email = "valentina.martinez@example.com",
-        PhoneNumber = "3156789123"
+        PhoneNumber = "3156789123",
+        Pets = new List<Pet>()
+        {
+            new Pet("Luna", "Conejo", "Hembra", 1, "Gris", "1.5kg", "Sano" , null!)
+        }
     },
     new Customer
     {
@@ -66,9 +81,13 @@ public class Services
         TypeDocument = "CE",
         NumberDocument = "890123456",
         Email = "miguel.suarez@example.com",
-        PhoneNumber = "3168901234"
+        PhoneNumber = "3168901234",
+        Pets = new List<Pet>()
+        {
+            new Pet("Rocky", "Perro", "Macho", 7, "Café", "25kg", "Dolor en la pata", null!)
+        }
     }
-    };
+};
 
     public void Interface(string sectionName)
     {
@@ -230,76 +249,7 @@ public class Services
 
     //--------------------------------------------------------------------------------------------------------------------
 
-    public void viewcustomerinformation()
-    {
-        Interface(" View customer");
-
-        if (_customers == null || _customers.Count == 0)
-        {
-            Console.WriteLine("No customers registered.");
-            return;
-        }
-
-        foreach (var customer in _customers)
-        {
-            Console.WriteLine($"{customer.Name} {customer.LastName} - Document: {customer.TypeDocument} {customer.NumberDocument}");
-            Console.WriteLine($"--");
-            return;
-        }
-
-        Console.WriteLine("Which client do you want to see specifically?");
-        string specificClient = Console.ReadLine() ?? "";
-        Console.WriteLine("[1] -see information?");
-        Console.WriteLine("[2] -see pets?");
-        string answer = Console.ReadLine() ?? "";
-        if (answer == "1")
-        {
-            ShowInfo(specificClient);
-            return;
-        }
-        else if (answer == "2")
-        {
-            ShowPets(specificClient);
-            return;
-        }
-        else
-        {
-            Console.WriteLine("Invalid option.");
-            return;
-        }
-
-        
-
-    }
-
-    public void ShowInfo(string specificClient)
-    {
-        if (specificClient == null)
-        {
-            Console.WriteLine("No client specified.");
-            return;
-        }
-
-        else
-        {
-            foreach (var customer in _customers)
-            {
-                if (customer.Name.Equals(specificClient, StringComparison.OrdinalIgnoreCase) ||
-                    customer.LastName.Equals(specificClient, StringComparison.OrdinalIgnoreCase) ||
-                    $"{customer.Name} {customer.LastName}".Equals(specificClient, StringComparison.OrdinalIgnoreCase))
-                {
-                    Console.WriteLine($"Customer Information:");
-                    Console.WriteLine($"Name: {customer.Name} {customer.LastName}");
-                    Console.WriteLine($"Last Name:  {customer.LastName}");
-                    Console.WriteLine($"Age: {customer.Age}");
-                    Console.WriteLine($"Document: {customer.TypeDocument} {customer.NumberDocument}");
-                    Console.WriteLine($"Email: {customer.Email}");
-                    Console.WriteLine($"Phone Number: {customer.PhoneNumber}");
-                    return;
-                }
-            }
-        }
-    }
+    
 
 
 
