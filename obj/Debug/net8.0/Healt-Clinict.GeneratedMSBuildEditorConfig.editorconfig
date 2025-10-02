@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Healt_Clinict
-build_property.ProjectDir = C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\
+build_property.ProjectDir = /home/Coder/Vídeos/david/C# DIA1/Healt-Clinict/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

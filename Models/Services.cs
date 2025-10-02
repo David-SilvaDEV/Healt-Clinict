@@ -335,6 +335,36 @@ public class Services
         }
         Console.WriteLine("--------------------------------------------");
     }
+
+    public void deletePet()
+    {
+        Interface("Delete Pet");
+
+        Console.WriteLine("Enter the name of the pet to delete:");
+        string petName = Console.ReadLine() ?? "";
+        Console.WriteLine("Enter the document number of the pet owner:");
+        string ownerDocument = Console.ReadLine() ?? "";
+
+        foreach (var customer in Services._customers)
+        {
+            if (customer.NumberDocument.Equals(ownerDocument, StringComparison.OrdinalIgnoreCase))
+            {
+                var petToRemove = customer.Pets.FirstOrDefault(p => p.Name.Equals(petName, StringComparison.OrdinalIgnoreCase));
+                if (petToRemove != null)
+                {
+                    customer.Pets.Remove(petToRemove);
+                    Console.WriteLine($"Pet '{petName}' removed successfully.");
+                }
+                else
+                {
+                    Console.WriteLine($"No pet named '{petName}' found for this owner.");
+                }
+                Console.WriteLine("--------------------------------------------");
+                return; 
+            }
+        }
+
+    }
 }
 
 

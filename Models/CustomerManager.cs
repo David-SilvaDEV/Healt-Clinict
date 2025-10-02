@@ -152,5 +152,63 @@ public class CustomerManager
             }
         }
     }
+    //--------------------------------------------------------------------------
 
+    public void UpdateCustomer()
+    {
+        Services.Interface(" Update Customer");
+
+        Console.WriteLine("Enter the name of the client you want to update: ");
+        string Uname = Console.ReadLine() ?? "";
+        Console.WriteLine("Enter the document number: ");
+        string Udocument = Console.ReadLine() ?? "";
+        Console.WriteLine("Enter the type of document: ");
+        string UtypeDocument = Console.ReadLine() ?? "";
+
+        foreach (var customer in Services._customers)
+        {
+            if (customer.Name.Equals(Uname) && customer.NumberDocument.Equals(Udocument) && customer.TypeDocument.Equals(UtypeDocument))
+
+            {
+                Console.WriteLine("Enter new name (or press Enter to keep current): ");
+                string newName = Console.ReadLine() ?? "";
+                if (!string.IsNullOrWhiteSpace(newName))
+                {
+                    customer.Name = newName;
+                }
+
+                Console.WriteLine("Enter new last name (or press Enter to keep current): ");
+                string newLastName = Console.ReadLine() ?? "";
+                if (!string.IsNullOrWhiteSpace(newLastName))
+                {
+                    customer.LastName = newLastName;
+                }
+
+                Console.WriteLine("Enter new age (or press Enter to keep current): ");
+                string newAgeInput = Console.ReadLine() ?? "";
+                if (int.TryParse(newAgeInput, out int newAge))
+                {
+                    customer.Age = newAge;
+                }
+
+                Console.WriteLine("Enter new email (or press Enter to keep current): ");
+                string newEmail = Console.ReadLine() ?? "";
+                if (!string.IsNullOrWhiteSpace(newEmail))
+                {
+                    customer.Email = newEmail;
+                }
+
+                Console.WriteLine("Enter new phone number (or press Enter to keep current): ");
+                string newPhoneNumber = Console.ReadLine() ?? "";
+                if (!string.IsNullOrWhiteSpace(newPhoneNumber))
+                {
+                    customer.PhoneNumber = newPhoneNumber;
+                }
+
+                Console.WriteLine($"Customer {customer.Name} information updated successfully.");
+                Console.WriteLine("----------------------------------------");
+                return;
+            }
+        }
+    }
 }

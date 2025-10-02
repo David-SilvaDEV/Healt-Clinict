@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {}
+    "/home/Coder/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PC\\OneDrive\\Pictures-PC\\C#\\Healt-Clinict\\Healt-Clinict.csproj",
+      "projectUniqueName": "/home/Coder/Vídeos/david/C# DIA1/Healt-Clinict/Healt-Clinict.csproj",
       "projectName": "Healt-Clinict",
-      "projectPath": "C:\\Users\\PC\\OneDrive\\Pictures-PC\\C#\\Healt-Clinict\\Healt-Clinict.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PC\\OneDrive\\Pictures-PC\\C#\\Healt-Clinict\\obj\\",
+      "projectPath": "/home/Coder/Vídeos/david/C# DIA1/Healt-Clinict/Healt-Clinict.csproj",
+      "packagesPath": "/home/Coder/.nuget/packages/",
+      "outputPath": "/home/Coder/Vídeos/david/C# DIA1/Healt-Clinict/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/Coder/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -38,11 +38,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -64,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.414/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.119/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

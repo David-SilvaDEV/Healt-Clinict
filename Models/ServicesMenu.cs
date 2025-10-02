@@ -61,7 +61,7 @@ public class ServicesMenu
                 customerManager.viewcustomerinformation();
                 break;
             case "3":
-                Console.WriteLine("Update customer information");
+                customerManager.UpdateCustomer();
                 break;
             case "4":
                 customerManager.DeleteCustomer();
@@ -93,13 +93,13 @@ public class ServicesMenu
                 Services.RegisterPet();
                 break;
             case "2":
-
+                ShowInformationPets();
                 break;
             case "3":
                 Console.WriteLine("Update pet information");
                 break;
             case "4":
-                Console.WriteLine("Delete pet");
+                Services.deletePet();
                 break;
             case "5":
                 MainMenu();
@@ -112,26 +112,26 @@ public class ServicesMenu
         }
     }
 
-    public void ShowInformation ()
+    public void ShowInformationPets()
     {
         Services.Interface(" Information");
-        Console.WriteLine("[2] -View all pets");
-        Console.WriteLine("[3] -View pet by type");
-        Console.WriteLine("[4] -View pets by age (oldest to youngest)");
-        Console.WriteLine("[5] -View pets alphabetically by name");
-        Console.WriteLine("[6] -Return to main menu");
+        Console.WriteLine("[1] -View all pets");
+        Console.WriteLine("[2] -View pet by type");
+        Console.WriteLine("[3] -View pet by age");
+        Console.WriteLine("[4] -View pets alphabetically by name");
+        Console.WriteLine("[5] -Return to main menu");
 
         string answer = Console.ReadLine() ?? "";
         switch (answer)
         {
             case "1":
-                customerManager.viewcustomerinformation();
-                break;
-            case "2":
                 Services.ShowAllPets();
                 break;
+            case "2":
+                Services.FilterPetType();
+                break;
             case "3":
-                Console.WriteLine("View all employees");
+                Services.FilterPetAgeMoreless();
                 break;
             case "4":
                 MainMenu();
@@ -142,6 +142,7 @@ public class ServicesMenu
                 Console.ReadKey();
                 break;
         }
+
     }
 
 }
