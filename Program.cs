@@ -9,6 +9,8 @@ ServicesMenu servicesMenu = new ServicesMenu();
 
 //servicesMenu.MainMenu();
 
-services.FilterPetAlfabeticName();
+//services.FilterPetAlfabeticName();
+
+services.ShowAllPets();
 
 //customerManager.viewcustomerinformation();

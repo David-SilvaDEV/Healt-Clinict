@@ -312,8 +312,9 @@ public class Services
         {
             Console.WriteLine($"- Name: {pet.Name} | Type: ({pet.TypeAnimal}), Age: ({pet.Age} years old), Owner: {pet.Owner.Name}");
         }
+        Console.WriteLine("--------------------------------------------");
     }
-    
+
     public void ShowAllPets()
     {
         Interface("All Registered Pets");
@@ -332,6 +333,7 @@ public class Services
         {
             Console.WriteLine($"- Name: {pet.Name} | Type: ({pet.TypeAnimal}), Age: ({pet.Age} years old), Owner: {pet.Owner.Name} {pet.Owner.NumberDocument}");
         }
+        Console.WriteLine("--------------------------------------------");
     }
 }
 
