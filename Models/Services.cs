@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Healt_Clinict.Models;
 
 public class Services
-{       
+{
     
 
     // Lista en memoria para poder buscar clientes al registrar solo mascota
@@ -93,7 +93,7 @@ public class Services
 
 };
 
-    public void Interface(string sectionName)
+    public  void Interface(string sectionName)
     {
         Console.Clear();
         Console.WriteLine($"-[section of {sectionName}]-");
@@ -281,9 +281,38 @@ public class Services
         }
         Console.WriteLine("--------------------------------------------");
 
-    }   
+    }
+
+    public void FilterPetAgeMoreless()
+    {
+        Interface("Filter Pets by Age");
+
+        var sortedPets = Services._customers
+            .SelectMany(c => c.Pets)
+            .OrderByDescending(p => p.Age); // mayor a menor
+
+        Console.WriteLine("Pets from oldest to youngest:");
+        foreach (var pet in sortedPets)
+        {
+            Console.WriteLine($"- {pet.Age} years old,| Name: {pet.Name} |Type: ({pet.TypeAnimal}),  Owner: {pet.Owner.Name}");
+        }
+    }
 
 
+    public void FilterPetAlfabeticName()
+    {
+        Interface("Filter Pets by Name (Alphabetically)");
+
+        var sortedPets = Services._customers
+            .SelectMany(c => c.Pets)
+            .OrderBy(p => p.Name); // Ordenar alfabéticamente por nombre
+
+        Console.WriteLine("Pets sorted alphabetically by name:");
+        foreach (var pet in sortedPets)
+        {
+            Console.WriteLine($"- Name: {pet.Name} | Type: ({pet.TypeAnimal}), Age: ({pet.Age} years old), Owner: {pet.Owner.Name}");
+        }
+    }
 }
 
 
