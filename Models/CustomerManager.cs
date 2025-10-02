@@ -22,7 +22,7 @@ public class CustomerManager
 
         }
 
-        Console.WriteLine("Which client do you want to see specifically?");
+        Console.WriteLine("Which client do you want to see specifically? Enter their document number.");
         string specificClient = Console.ReadLine() ?? "";
         Console.WriteLine("[1] -see information?");
         Console.WriteLine("[2] -see pets?");
@@ -59,9 +59,8 @@ public class CustomerManager
         {
             foreach (var customer in Services._customers)
             {
-                if (customer.Name.Equals(specificClient, StringComparison.OrdinalIgnoreCase) ||
-                    customer.LastName.Equals(specificClient, StringComparison.OrdinalIgnoreCase) ||
-                    $"{customer.Name} {customer.LastName}".Equals(specificClient, StringComparison.OrdinalIgnoreCase))
+                if (customer.NumberDocument.Equals(specificClient))
+
                 {
                     Console.Clear();
                     Console.WriteLine("----------------------------------------");
@@ -91,9 +90,8 @@ public class CustomerManager
         {
             foreach (var customer in Services._customers)
             {
-                if (customer.Name.Equals(specificClient, StringComparison.OrdinalIgnoreCase) ||
-                    customer.LastName.Equals(specificClient, StringComparison.OrdinalIgnoreCase) ||
-                    $"{customer.Name} {customer.LastName}".Equals(specificClient, StringComparison.OrdinalIgnoreCase))
+                if (customer.NumberDocument.Equals(specificClient))
+
                 {
                     Console.Clear();
                     Console.WriteLine($"Pets of {customer.Name} {customer.LastName}:");
@@ -102,15 +100,18 @@ public class CustomerManager
                         Console.WriteLine("No pets registered for this customer.");
                     }
                     else
-                    {   
-                        
+                    {
+
                         foreach (var pet in customer.Pets)
                         {
+                            Console.WriteLine("----------------------------------------");
                             Console.WriteLine($"Type: {pet.TypeAnimal} | Name: {pet.Name}, | Age: {pet.Age}, | Symptoms: {pet.Symptoms}");
+                            Console.WriteLine("----------------------------------------");
                         }
+                        
                     }
                     return;
-                }  
+                }
             }
         }
     }
