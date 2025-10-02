@@ -12,7 +12,7 @@ namespace Healt_Clinict.obj.Models
 
         public string TypeDocument { get; set; }
 
-        public required String NumberDocument { get; set; }
+        public  String NumberDocument { get; set; }
 
         public string Email { get; set; }
 

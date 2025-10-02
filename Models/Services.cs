@@ -2,13 +2,73 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Healt_Clinict.obj.Models;
+using System.Runtime.CompilerServices;
 
 namespace Healt_Clinict.Models;
 
 public class Services
 {
+
     // Lista en memoria para poder buscar clientes al registrar solo mascota
-    private readonly List<Customer> _customers = new();
+    private List<Customer> _customers = new()
+    {
+
+     new Customer
+    {
+        Id = Guid.NewGuid(),
+        Name = "Carlos",
+        LastName = "Ramírez",
+        Age = 28,
+        TypeDocument = "CC",
+        NumberDocument = "1002456789",
+        Email = "carlos.ramirez@example.com",
+        PhoneNumber = "3004567890"
+    },
+    new Customer
+    {
+        Id = Guid.NewGuid(),
+        Name = "Laura",
+        LastName = "Gómez",
+        Age = 34,
+        TypeDocument = "CC",
+        NumberDocument = "1003987654",
+        Email = "laura.gomez@example.com",
+        PhoneNumber = "3019876543"
+    },
+    new Customer
+    {
+        Id = Guid.NewGuid(),
+        Name = "Andrés",
+        LastName = "Torres",
+        Age = 22,
+        TypeDocument = "TI",
+        NumberDocument = "1122334455",
+        Email = "andres.torres@example.com",
+        PhoneNumber = "3021234567"
+    },
+    new Customer
+    {
+        Id = Guid.NewGuid(),
+        Name = "Valentina",
+        LastName = "Martínez",
+        Age = 29,
+        TypeDocument = "CC",
+        NumberDocument = "1005678912",
+        Email = "valentina.martinez@example.com",
+        PhoneNumber = "3156789123"
+    },
+    new Customer
+    {
+        Id = Guid.NewGuid(),
+        Name = "Miguel",
+        LastName = "Suárez",
+        Age = 40,
+        TypeDocument = "CE",
+        NumberDocument = "890123456",
+        Email = "miguel.suarez@example.com",
+        PhoneNumber = "3168901234"
+    }
+    };
 
     public void Interface(string sectionName)
     {
@@ -164,4 +224,87 @@ public class Services
         customer.Pets.Add(newPet);
         Console.WriteLine("Pet registered and associated with the client correctly.");
     }
+
+
+
+
+    //--------------------------------------------------------------------------------------------------------------------
+
+    public void viewcustomerinformation()
+    {
+        Interface(" View customer");
+
+        if (_customers == null || _customers.Count == 0)
+        {
+            Console.WriteLine("No customers registered.");
+            return;
+        }
+
+        foreach (var customer in _customers)
+        {
+            Console.WriteLine($"{customer.Name} {customer.LastName} - Document: {customer.TypeDocument} {customer.NumberDocument}");
+            Console.WriteLine($"--");
+            return;
+        }
+
+        Console.WriteLine("Which client do you want to see specifically?");
+        string specificClient = Console.ReadLine() ?? "";
+        Console.WriteLine("[1] -see information?");
+        Console.WriteLine("[2] -see pets?");
+        string answer = Console.ReadLine() ?? "";
+        if (answer == "1")
+        {
+            ShowInfo(specificClient);
+            return;
+        }
+        else if (answer == "2")
+        {
+            ShowPets(specificClient);
+            return;
+        }
+        else
+        {
+            Console.WriteLine("Invalid option.");
+            return;
+        }
+
+        
+
+    }
+
+    public void ShowInfo(string specificClient)
+    {
+        if (specificClient == null)
+        {
+            Console.WriteLine("No client specified.");
+            return;
+        }
+
+        else
+        {
+            foreach (var customer in _customers)
+            {
+                if (customer.Name.Equals(specificClient, StringComparison.OrdinalIgnoreCase) ||
+                    customer.LastName.Equals(specificClient, StringComparison.OrdinalIgnoreCase) ||
+                    $"{customer.Name} {customer.LastName}".Equals(specificClient, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"Customer Information:");
+                    Console.WriteLine($"Name: {customer.Name} {customer.LastName}");
+                    Console.WriteLine($"Last Name:  {customer.LastName}");
+                    Console.WriteLine($"Age: {customer.Age}");
+                    Console.WriteLine($"Document: {customer.TypeDocument} {customer.NumberDocument}");
+                    Console.WriteLine($"Email: {customer.Email}");
+                    Console.WriteLine($"Phone Number: {customer.PhoneNumber}");
+                    return;
+                }
+            }
+        }
+    }
+
+
+
 }
+
+
+
+

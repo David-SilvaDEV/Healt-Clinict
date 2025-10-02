@@ -3,3 +3,13 @@ c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict
 c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.AssemblyInfo.cs
 c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.csproj.CoreCompileInputs.cache
 c:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.sourcelink.json
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\bin\Debug\net8.0\Healt-Clinict.exe
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\bin\Debug\net8.0\Healt-Clinict.deps.json
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\bin\Debug\net8.0\Healt-Clinict.runtimeconfig.json
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\bin\Debug\net8.0\Healt-Clinict.dll
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\bin\Debug\net8.0\Healt-Clinict.pdb
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.dll
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\refint\Healt-Clinict.dll
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.pdb
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\Healt-Clinict.genruntimeconfig.cache
+C:\Users\PC\OneDrive\Pictures-PC\C#\Healt-Clinict\obj\Debug\net8.0\ref\Healt-Clinict.dll

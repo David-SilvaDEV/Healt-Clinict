@@ -1,6 +1,9 @@
 ﻿
+using Healt_Clinict.Models;
 
 
+using Healt_Clinict.obj.Models;
+Services services = new Services();
 static void MainMenu()
 {
     while (true)
@@ -12,6 +15,10 @@ static void MainMenu()
         Console.WriteLine("[2] show list of clients with their pets");
         Console.WriteLine("[3] Delete Patient");
         Console.WriteLine("[4] Delete pet");
-        
+
+        // ...menu logic...
     }
 }
+
+
+services.viewcustomerinformation();
