@@ -9,7 +9,7 @@ public class ServicesMenu
     //----------------------------------------------------------------------------------------------------------
     public void MainMenu()
     {
-        while (true)
+       
         {
             Console.Clear();
             Console.WriteLine("---- Welcome to the Health Clinic Manager ----");
@@ -38,6 +38,7 @@ public class ServicesMenu
                     Console.WriteLine("Invalid option. Please try again.");
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
+                    MainMenu();
                     break;
             }
         }
@@ -50,7 +51,7 @@ public class ServicesMenu
         Console.WriteLine("[1] -Register customer");
         Console.WriteLine("[2] -View customer information");
         Console.WriteLine("[3] -Update customer information");
-        Console.WriteLine("[4] -Delete customer");
+        Console.WriteLine("[4] -Delete c1ustomer");
         Console.WriteLine("[5] -Return to main menu");
         string answer = Console.ReadLine() ?? "";
         switch (answer)
