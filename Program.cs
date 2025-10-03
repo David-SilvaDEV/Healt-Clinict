@@ -15,7 +15,12 @@ ServicesMenu servicesMenu = new ServicesMenu();
 
 //customerManager.viewcustomerinformation();
 
-//servicesMenu.MainMenu();
+servicesMenu.MainMenu();
 
 //servicesMenu.ShowInformationPets();
+
+
+
+// opciones pets
+
 
