@@ -1,21 +1,102 @@
-namespace Healt_Clinict.Models;
 
-public class CustomerManager
-{
+namespace Healt_Clinict.repository;
+using Healt_Clinict.Models;
+using Healt_Clinict.obj.Models;
+using Healt_Clinict.database;
 
-    Services Services = new Services();
+    public class CustomerRepository
+    {
+        Services Services = new Services();
+        Warehouse warehouse = new Warehouse();
+        
+        PetRepository petRepository = new PetRepository();
+        Pet pet = new Pet();
+
+       
     //--------------------------------------------------------------------------
+
+    public void RegisterCustomer()
+    {
+
+        Services.Interface("Register Customer");
+
+
+
+        Console.WriteLine("Write the client's name: ");
+        string name = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Enter the customer's last name: ");
+        string lastName = Console.ReadLine() ?? "";
+
+        int age = -1; // Inicializamos en un valor negativo para entrar en el ciclo
+
+        // Validación de la edad
+        while (age < 0)
+        {
+            try
+            {
+                Console.WriteLine("Write patient age:");
+                age = int.Parse(Console.ReadLine() ?? "");
+
+                if (age < 0)
+                {
+                    Console.WriteLine("Age must be a positive number. Please enter a valid age.");
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input! Please enter a valid number.");
+            }
+        }
+
+        Console.WriteLine("Enter the type of document: ");
+        string typeDocument = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Enter the document number: ");
+        string numberDocument = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Enter the email: ");
+        string email = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Enter the phone number: ");
+        string phoneNumber = Console.ReadLine() ?? "";
+
+        Customer NewCustomer = new Customer
+        {
+            Id = Guid.NewGuid(),
+            Name = name,
+            LastName = lastName,
+            Age = age,
+            TypeDocument = typeDocument,
+            NumberDocument = numberDocument,
+            Email = email,
+            PhoneNumber = phoneNumber,
+            Pets = new List<Pet>()
+        };
+
+        // Registrar la mascota y asociarla al cliente creado
+        Pet newPet = petRepository.RegisterPet();
+        newPet.Owner = NewCustomer;
+        NewCustomer.Pets.Add(newPet);
+
+        // Guardar el cliente para búsquedas posteriores (Registeronlypet)
+        warehouse._customers.Add(NewCustomer);
+
+    }
+
+
     public void viewcustomerinformation()
     {
         Services.Interface(" View customer");
+        
 
-        if (Services._customers == null || Services._customers.Count == 0)
+        if (warehouse._customers == null || warehouse._customers.Count == 0)
         {
             Console.WriteLine("No customers registered.");
             return;
         }
 
-        foreach (var customer in Services._customers)
+        foreach (var customer in warehouse._customers)
         {
             Console.WriteLine($"{customer.Name} {customer.LastName} - Document: {customer.TypeDocument} {customer.NumberDocument}");
             Console.WriteLine($"--");
@@ -57,7 +138,7 @@ public class CustomerManager
 
         else
         {
-            foreach (var customer in Services._customers)
+            foreach (var customer in warehouse._customers)
             {
                 if (customer.NumberDocument.Equals(specificClient))
 
@@ -88,7 +169,7 @@ public class CustomerManager
         }
         else
         {
-            foreach (var customer in Services._customers)
+            foreach (var customer in warehouse._customers)
             {
                 if (customer.NumberDocument.Equals(specificClient))
 
@@ -122,7 +203,7 @@ public class CustomerManager
     {
         Services.Interface(" Delete Customer");
 
-        if (Services._customers == null || Services._customers.Count == 0)
+        if (warehouse._customers == null || warehouse._customers.Count == 0)
         {
             Console.WriteLine("No customers registered.");
             return;
@@ -134,12 +215,12 @@ public class CustomerManager
             string documentNumber = Console.ReadLine() ?? "";
             Console.WriteLine("write the type of client document: ");
             string typeDocument = Console.ReadLine() ?? "";
-            foreach (var customer in Services._customers)
+            foreach (var customer in warehouse._customers)
             {
                 if (customer.NumberDocument.Equals(documentNumber) && customer.TypeDocument.Equals(typeDocument))
 
                 {
-                    Services._customers.Remove(customer);
+                    warehouse._customers.Remove(customer);
                     Console.WriteLine("Customer deleted successfully.");
                     return;
                 }
@@ -165,7 +246,7 @@ public class CustomerManager
         Console.WriteLine("Enter the type of document: ");
         string UtypeDocument = Console.ReadLine() ?? "";
 
-        foreach (var customer in Services._customers)
+        foreach (var customer in warehouse._customers)
         {
             if (customer.Name.Equals(Uname) && customer.NumberDocument.Equals(Udocument) && customer.TypeDocument.Equals(UtypeDocument))
 
@@ -212,3 +293,4 @@ public class CustomerManager
         }
     }
 }
+    

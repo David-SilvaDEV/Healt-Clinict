@@ -18,6 +18,10 @@ namespace Healt_Clinict.obj.Models
             Symptoms = symptoms;
             Owner = new Customer(); // Initialize Owner with a default value
         }
+
+        public Pet()
+        {
+        }
     }
 }
 

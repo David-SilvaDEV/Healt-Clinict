@@ -1,11 +1,10 @@
 ﻿
 using Healt_Clinict.Models;
-
+using Healt_Clinict.repository;
 
 using Healt_Clinict.obj.Models;
 Services services = new Services();
-CustomerManager customerManager = new CustomerManager();
-ServicesMenu servicesMenu = new ServicesMenu();
+CustomerRepository customerRepository= new CustomerRepository();
 
 //servicesMenu.MainMenu();
 
@@ -15,7 +14,7 @@ ServicesMenu servicesMenu = new ServicesMenu();
 
 //customerManager.viewcustomerinformation();
 
-servicesMenu.MainMenu();
+customerRepository.viewcustomerinformation();
 
 //servicesMenu.ShowInformationPets();
 
