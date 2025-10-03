@@ -11,6 +11,11 @@ ServicesMenu servicesMenu = new ServicesMenu();
 
 //services.FilterPetAlfabeticName();
 
-services.ShowAllPets();
+//services.ShowAllPets();
 
 //customerManager.viewcustomerinformation();
+
+//servicesMenu.MainMenu();
+
+//servicesMenu.ShowInformationPets();
+

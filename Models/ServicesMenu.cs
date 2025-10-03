@@ -4,6 +4,8 @@ public class ServicesMenu
 {
     Services Services = new Services();
     CustomerManager customerManager = new CustomerManager();
+
+    
     //----------------------------------------------------------------------------------------------------------
     public void MainMenu()
     {
@@ -21,7 +23,7 @@ public class ServicesMenu
             switch (answer)
             {
                 case "1":
-                    CustomerMennu();
+                    CustomerMenu();
                     break;
                 case "2":
                     PetsMenu();
@@ -42,7 +44,7 @@ public class ServicesMenu
 
     }
 
-    public void CustomerMennu()
+    public void CustomerMenu()
     {
         Services.Interface(" Customer Menu");
         Console.WriteLine("[1] -Register customer");
@@ -134,6 +136,9 @@ public class ServicesMenu
                 Services.FilterPetAgeMoreless();
                 break;
             case "4":
+                Services.FilterPetAlfabeticName();
+                break;
+            case "5":
                 MainMenu();
                 break;
             default:

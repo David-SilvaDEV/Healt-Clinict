@@ -326,6 +326,7 @@ public class Services
         {
             Console.WriteLine("No pets registered.");
             return;
+            
         }
 
         Console.WriteLine("List of all registered pets:");
@@ -333,7 +334,7 @@ public class Services
         {
             Console.WriteLine($"- Name: {pet.Name} | Type: ({pet.TypeAnimal}), Age: ({pet.Age} years old), Owner: {pet.Owner.Name} {pet.Owner.NumberDocument}");
         }
-        Console.WriteLine("--------------------------------------------");
+        Console.WriteLine("------------------------------------------------");
     }
 
     public void DeletePet()
