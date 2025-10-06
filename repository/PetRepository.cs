@@ -7,13 +7,14 @@ using Healt_Clinict.repository;
 
 
     public class PetRepository
-    {
+    {   
+        
         Services Services = new Services();
         Pet pet = new Pet();
-        Warehouse warehouse = new Warehouse();
         
-        
-        public Pet RegisterPet()
+
+
+    public Pet RegisterPet()
     {
         Services.Interface("Register Pet");
         Console.WriteLine("Enter the pet's name: ");
@@ -56,9 +57,10 @@ using Healt_Clinict.repository;
         // Crear usando el constructor que requiere parámetros
         Pet newPet = new Pet(name, typeAnimal, sex, age, color, weight, symptoms);
 
-
+        
         // devolver la mascota para que el llamador la asigne al cliente
-        return newPet;
+        return newPet; 
+        
     }
 
     public void Registeronlypet()
@@ -70,7 +72,7 @@ using Healt_Clinict.repository;
         string ownerName = Console.ReadLine() ?? "";
 
         // Buscar cliente que coincida en id y en nombre (Name o LastName o "Name LastName")
-        var customer = warehouse._customers.FirstOrDefault(c =>
+        var customer = Warehouse._customers.FirstOrDefault(c =>
             !string.IsNullOrEmpty(c.NumberDocument) &&
             c.NumberDocument.Equals(idNumber, StringComparison.OrdinalIgnoreCase) &&
             (
@@ -105,7 +107,7 @@ using Healt_Clinict.repository;
 
         // Mostrar los tipos únicos
         Console.WriteLine("Types of registered animals:");
-        foreach (var pet in warehouse._customers.SelectMany(c => c.Pets).DistinctBy(p => p.TypeAnimal))
+        foreach (var pet in Warehouse._customers.SelectMany(c => c.Pets).DistinctBy(p => p.TypeAnimal))
         {
             Console.WriteLine($"- {pet.TypeAnimal}");
         }
@@ -114,7 +116,7 @@ using Healt_Clinict.repository;
         string typeAnimal = Console.ReadLine() ?? "";
 
         // Filtrar y mostrar todas las mascotas de ese tipo
-        var filteredPets = warehouse._customers
+        var filteredPets = Warehouse._customers
             .SelectMany(c => c.Pets)
             .Where(p => p.TypeAnimal.Equals(typeAnimal, StringComparison.OrdinalIgnoreCase));
 
@@ -131,7 +133,7 @@ using Healt_Clinict.repository;
     {
         Services.Interface("Filter Pets by Age");
 
-        var sortedPets = warehouse._customers
+        var sortedPets = Warehouse._customers
             .SelectMany(c => c.Pets)
             .OrderByDescending(p => p.Age); // mayor a menor
 
@@ -147,7 +149,7 @@ using Healt_Clinict.repository;
     {
         Services.Interface("Filter Pets by Name (Alphabetically)");
 
-        var sortedPets = warehouse._customers
+        var sortedPets = Warehouse._customers
             .SelectMany(c => c.Pets)
             .OrderBy(p => p.Name); // Ordenar alfabéticamente por nombre
 
@@ -163,7 +165,7 @@ using Healt_Clinict.repository;
     {
         Services.Interface("All Registered Pets");
 
-        var allPets = warehouse._customers
+        var allPets = Warehouse._customers
             .SelectMany(c => c.Pets);
 
         if (!allPets.Any())
@@ -190,7 +192,7 @@ using Healt_Clinict.repository;
         Console.WriteLine("Enter the document number of the pet owner:");
         string ownerDocument = Console.ReadLine() ?? "";
 
-        foreach (var customer in warehouse._customers)
+        foreach (var customer in Warehouse._customers)
         {
             if (customer.NumberDocument.Equals(ownerDocument, StringComparison.OrdinalIgnoreCase))
             {
@@ -221,7 +223,7 @@ using Healt_Clinict.repository;
         Console.WriteLine("Enter the document number of the pet owner:");
         string ownerDocument = Console.ReadLine() ?? "";
 
-        foreach (var customer in warehouse._customers)
+        foreach (var customer in Warehouse._customers)
         {
             if (customer.NumberDocument.Equals(ownerDocument, StringComparison.OrdinalIgnoreCase))
             {

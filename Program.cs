@@ -14,7 +14,8 @@ CustomerRepository customerRepository= new CustomerRepository();
 
 //customerManager.viewcustomerinformation();
 
-customerRepository.viewcustomerinformation();
+ServicesMenu servicesMenu = new ServicesMenu();
+servicesMenu.MainMenu();
 
 //servicesMenu.ShowInformationPets();
 

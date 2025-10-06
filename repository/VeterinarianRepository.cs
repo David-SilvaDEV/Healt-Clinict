@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 using System.Security.Cryptography.X509Certificates;
 using Healt_Clinict.Models;
-using Healt_Clinict.Thing_Models;
+
 using Healt_Clinict.database;
 
 
@@ -12,7 +12,7 @@ using Healt_Clinict.database;
 public class VeterinarianRepository
 {
     Services services = new Services();
-    Warehouse warehouse = new Warehouse();
+    
     public void RegisterVeterinarian()
     {
         services.Interface("Register Veterinarian");
@@ -74,7 +74,7 @@ public class VeterinarianRepository
 
         };
 
-        warehouse._veterinarians.Add(NewVeterinarian);
+        Warehouse._veterinarians.Add(NewVeterinarian);
 
     }
 
@@ -83,13 +83,13 @@ public class VeterinarianRepository
         services.Interface(" View Veterinarian");
 
 
-        if (warehouse._veterinarians == null || warehouse._veterinarians.Count == 0)
+        if (Warehouse._veterinarians == null || Warehouse._veterinarians.Count == 0)
         {
             Console.WriteLine("No Veterinarian registered.");
             return;
         }
 
-        foreach (var veterinarian in warehouse._veterinarians)
+        foreach (var veterinarian in Warehouse._veterinarians)
         {
             Console.WriteLine($"{veterinarian.Name} {veterinarian.LastName} - Document: {veterinarian.TypeDocument} {veterinarian.NumberDocument}");
             Console.WriteLine($"--");
@@ -113,7 +113,7 @@ public class VeterinarianRepository
 
         else
         {
-            foreach (var veterinarian in warehouse._veterinarians)
+            foreach (var veterinarian in Warehouse._veterinarians)
             {
                 if (veterinarian.NumberDocument.Equals(specificVeterinarian))
 
@@ -142,7 +142,7 @@ public class VeterinarianRepository
     {
         services.Interface(" Delete Veterinarian");
 
-        if (warehouse._veterinarians == null || warehouse._veterinarians.Count == 0)
+        if (Warehouse._veterinarians == null || Warehouse._veterinarians.Count == 0)
         {
             Console.WriteLine("No Veterinarian registered.");
             return;
@@ -154,12 +154,12 @@ public class VeterinarianRepository
             string documentNumber = Console.ReadLine() ?? "";
             Console.WriteLine("write the type of client document: ");
             string typeDocument = Console.ReadLine() ?? "";
-            foreach (var veterinarian in warehouse._veterinarians)
+            foreach (var veterinarian in Warehouse._veterinarians)
             {
                 if (veterinarian.NumberDocument.Equals(documentNumber) && veterinarian.TypeDocument.Equals(typeDocument))
 
                 {
-                    warehouse._veterinarians.Remove(veterinarian);
+                    Warehouse._veterinarians.Remove(veterinarian);
                     Console.WriteLine("Veterinarian deleted successfully.");
                     return;
                 }
@@ -167,10 +167,12 @@ public class VeterinarianRepository
                 else
                 {
                     Console.WriteLine("Veterinarian not found.");
+                    Console.WriteLine("----------------------------------------");
                     return;
+                    
                 }
 
-                Console.WriteLine("----------------------------------------");
+                
             }
         }
     }
@@ -187,7 +189,7 @@ public class VeterinarianRepository
         Console.WriteLine("Enter the type of document: ");
         string UtypeDocument = Console.ReadLine() ?? "";
 
-        foreach (var veterinarian in warehouse._veterinarians)
+        foreach (var veterinarian in Warehouse._veterinarians)
         {
             if (veterinarian.Name.Equals(Uname) && veterinarian.NumberDocument.Equals(Udocument) && veterinarian.TypeDocument.Equals(UtypeDocument))
 

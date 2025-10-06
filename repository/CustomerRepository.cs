@@ -3,16 +3,22 @@ namespace Healt_Clinict.repository;
 using Healt_Clinict.Models;
 using Healt_Clinict.obj.Models;
 using Healt_Clinict.database;
+using Healt_Clinict.Services;
+using Healt_Clinict.Interfaces;
 
-    public class CustomerRepository
-    {
+
+public class CustomerRepository: ICustomerRepository
+    {   
         Services Services = new Services();
-        Warehouse warehouse = new Warehouse();
+        
+        
         
         PetRepository petRepository = new PetRepository();
-        Pet pet = new Pet();
 
-       
+        
+
+
+
     //--------------------------------------------------------------------------
 
     public void RegisterCustomer()
@@ -35,7 +41,7 @@ using Healt_Clinict.database;
         {
             try
             {
-                Console.WriteLine("Write patient age:");
+                Console.WriteLine("Write Customer age:");
                 age = int.Parse(Console.ReadLine() ?? "");
 
                 if (age < 0)
@@ -74,13 +80,16 @@ using Healt_Clinict.database;
             Pets = new List<Pet>()
         };
 
+
         // Registrar la mascota y asociarla al cliente creado
         Pet newPet = petRepository.RegisterPet();
         newPet.Owner = NewCustomer;
         NewCustomer.Pets.Add(newPet);
 
         // Guardar el cliente para búsquedas posteriores (Registeronlypet)
-        warehouse._customers.Add(NewCustomer);
+        Warehouse._customers.Add(NewCustomer);
+        ServicesValidation.ReturnToMenu();
+        return;
 
     }
 
@@ -90,18 +99,19 @@ using Healt_Clinict.database;
         Services.Interface(" View customer");
         
 
-        if (warehouse._customers == null || warehouse._customers.Count == 0)
+        if (Warehouse._customers == null || Warehouse._customers.Count == 0)
         {
             Console.WriteLine("No customers registered.");
             return;
         }
 
-        foreach (var customer in warehouse._customers)
+        foreach (var customer in Warehouse._customers)
         {
             Console.WriteLine($"{customer.Name} {customer.LastName} - Document: {customer.TypeDocument} {customer.NumberDocument}");
             Console.WriteLine($"--");
 
         }
+
 
         Console.WriteLine("Which client do you want to see specifically? Enter their document number.");
         string specificClient = Console.ReadLine() ?? "";
@@ -121,10 +131,12 @@ using Healt_Clinict.database;
         else
         {
             Console.WriteLine("Invalid option.");
+            
+            return;
 
         }
 
-
+        ServicesValidation.ReturnToMenu();
 
     }
 
@@ -133,12 +145,13 @@ using Healt_Clinict.database;
         if (specificClient == null)
         {
             Console.WriteLine("No client specified.");
+            ServicesValidation.ReturnToMenu();
             return;
         }
 
         else
         {
-            foreach (var customer in warehouse._customers)
+            foreach (var customer in Warehouse._customers)
             {
                 if (customer.NumberDocument.Equals(specificClient))
 
@@ -153,11 +166,11 @@ using Healt_Clinict.database;
                     Console.WriteLine($"Email: {customer.Email}");
                     Console.WriteLine($"Phone Number: {customer.PhoneNumber}");
                     Console.WriteLine("----------------------------------------");
-                    return;
+                    return ;
                 }
             }
         }
-
+        ServicesValidation.ReturnToMenu();
     }
 
     public void ShowClientPets(string specificClient)
@@ -169,7 +182,7 @@ using Healt_Clinict.database;
         }
         else
         {
-            foreach (var customer in warehouse._customers)
+            foreach (var customer in Warehouse._customers)
             {
                 if (customer.NumberDocument.Equals(specificClient))
 
@@ -195,7 +208,7 @@ using Healt_Clinict.database;
 
                 }
             }
-        }
+        }ServicesValidation.ReturnToMenu();
     }
 
 
@@ -203,7 +216,7 @@ using Healt_Clinict.database;
     {
         Services.Interface(" Delete Customer");
 
-        if (warehouse._customers == null || warehouse._customers.Count == 0)
+        if (Warehouse._customers == null || Warehouse._customers.Count == 0)
         {
             Console.WriteLine("No customers registered.");
             return;
@@ -215,12 +228,12 @@ using Healt_Clinict.database;
             string documentNumber = Console.ReadLine() ?? "";
             Console.WriteLine("write the type of client document: ");
             string typeDocument = Console.ReadLine() ?? "";
-            foreach (var customer in warehouse._customers)
+            foreach (var customer in Warehouse._customers)
             {
                 if (customer.NumberDocument.Equals(documentNumber) && customer.TypeDocument.Equals(typeDocument))
 
                 {
-                    warehouse._customers.Remove(customer);
+                    Warehouse._customers.Remove(customer);
                     Console.WriteLine("Customer deleted successfully.");
                     return;
                 }
@@ -231,7 +244,7 @@ using Healt_Clinict.database;
                     return;
                 }
             }
-        }
+        }ServicesValidation.ReturnToMenu();
     }
     //--------------------------------------------------------------------------
 
@@ -246,7 +259,7 @@ using Healt_Clinict.database;
         Console.WriteLine("Enter the type of document: ");
         string UtypeDocument = Console.ReadLine() ?? "";
 
-        foreach (var customer in warehouse._customers)
+        foreach (var customer in Warehouse._customers)
         {
             if (customer.Name.Equals(Uname) && customer.NumberDocument.Equals(Udocument) && customer.TypeDocument.Equals(UtypeDocument))
 

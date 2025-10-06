@@ -4,10 +4,10 @@ using Healt_Clinict.Models;
 using Healt_Clinict.obj.Models;
 namespace Healt_Clinict.database;
 
-public class Warehouse
+public static class Warehouse
 {
-     public List < Veterinarian > _veterinarians = new();
-    public List<Customer> _customers = new()
+     public static List < Veterinarian > _veterinarians = new();
+    public static List<Customer> _customers = new()
     {
         new Customer
         {

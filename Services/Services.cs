@@ -13,7 +13,7 @@ namespace Healt_Clinict.Models;
 public class Services
 {
 
-   Warehouse warehouse = new Warehouse();
+  
 
 //---------------------------------------------------------------
     public void Interface(string sectionName)
