@@ -1,25 +1,24 @@
-
-
-namespace Healt_Clinict.ClassesSupport;
-
-public class Appointment
+namespace Healt_Clinict.ClassesSupport
 {
-    public DateTime DateAndTime { get; set; }
-    public bool ThisReserved { get; set; }
-
-    public Appointment(DateTime dateAndTime)
+    public class Appointment
     {
-        DateAndTime = dateAndTime;
-        ThisReserved = false;
-    }
+        public DateTime DateAndTime { get; set; }
+        public bool IsReserved { get; set; }
 
-    public void Reserve()
-    {
-        ThisReserved = true;
-    }
+        public Appointment(DateTime dateAndTime)
+        {
+            DateAndTime = dateAndTime;
+            IsReserved = false;
+        }
 
-    public void Cancel()
-    {
-        ThisReserved = false;
+        public void Reserve()
+        {
+            IsReserved = true;
+        }
+
+        public void Cancel()
+        {
+            IsReserved = false;
+        }
     }
 }

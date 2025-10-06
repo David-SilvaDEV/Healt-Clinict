@@ -4,10 +4,11 @@ using Healt_Clinict.repository;
 
 using Healt_Clinict.obj.Models;
 using Healt_Clinict.ClassesSupport;
+using Health_Clinic.ClassesSupport;
 Services services = new Services();
 CustomerRepository customerRepository = new CustomerRepository();
 
-Calendar calendar = new Calendar ();
+
 //servicesMenu.MainMenu();
 
 //services.FilterPetAlfabeticName();
@@ -18,11 +19,10 @@ Calendar calendar = new Calendar ();
 
 //ServicesMenu servicesMenu = new ServicesMenu();
 //servicesMenu.MainMenu();
-calendar.DisplayCurrentCalendar();
 
-//servicesMenu.ShowInformationPets();
+  AppointmentSystem appointmentSystem = new AppointmentSystem();
 
-
+var reservationsSystem = new Healt_Clinict.ClassesSupport.ReservationsSystem();
 
 // opciones pets
 
