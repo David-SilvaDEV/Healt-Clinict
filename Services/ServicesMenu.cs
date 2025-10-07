@@ -6,10 +6,10 @@ namespace Healt_Clinict.Models;
 public class ServicesMenu
 {
     Services Services = new Services();
-   CustomerRepository customerManager = new CustomerRepository();
-   PetRepository petManager = new PetRepository();
+    CustomerRepository customerManager = new CustomerRepository();
+    PetRepository petManager = new PetRepository();
 
-    
+
     //----------------------------------------------------------------------------------------------------------
     public void MainMenu()
     {
@@ -63,20 +63,20 @@ public class ServicesMenu
             case "1":
                 //Services.RegisterCustomer();
                 customerManager.RegisterCustomer();
-                
+
                 break;
             case "2":
 
                 customerManager.viewcustomerinformation();
-                
+
                 break;
             case "3":
                 customerManager.UpdateCustomer();
-                
+
                 break;
             case "4":
                 customerManager.DeleteCustomer();
-                
+
                 break;
             case "5":
                 MainMenu();

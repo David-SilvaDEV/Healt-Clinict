@@ -6,7 +6,7 @@ namespace Healt_Clinict.database;
 
 public static class Warehouse
 {
-     public static List < Veterinarian > _veterinarians = new();
+    public static List<Veterinarian> _veterinarians = [];
     public static List<Customer> _customers = new()
     {
         new Customer
