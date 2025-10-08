@@ -8,13 +8,13 @@ using Healt_Clinict.Interfaces;
 using Microsoft.VisualBasic;
 using Healt_Clinict.Utils;
 
-public class CustomerRepository
+public class CustomerRepository : ICustomerRepository
     {   
         
    
 
 
-    public static void Register(Customer NewCustomer)
+    public  void Register(Customer NewCustomer)
     {
 
 
@@ -25,7 +25,7 @@ public class CustomerRepository
 
 
     //--------------------------------------------------------------------------
-    public static void Delete(Customer customer)
+    public  void Delete(Customer customer)
     {
         Warehouse.customers.Remove(customer);
     }

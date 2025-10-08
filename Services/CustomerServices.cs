@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace Healt_Clinict.Services;
 
 public class CustomerServices
 {
-
+    CustomerRepository customerRepository = new CustomerRepository();
     PetRepository petRepository = new PetRepository();
-    public void RegisterCustomer()
+    public  void RegisterCustomer()
     {
 
         VisualInterface.Interface("Register Customer");
@@ -85,7 +86,7 @@ public class CustomerServices
         NewCustomer.Pets.Add(newPet);
 
         // Guardar el cliente para búsquedas posteriores (Registeronlypet)
-        CustomerRepository.Register(NewCustomer);
+        customerRepository.Register(NewCustomer);
         VisualInterface.GreenColor("Customer added successfully!");
 
 
@@ -169,7 +170,7 @@ public class CustomerServices
                 if (customer.NumberDocument.Equals(documentNumber) && customer.TypeDocument.Equals(typeDocument))
 
                 {
-                    CustomerRepository.Delete(customer);
+                    customerRepository.Delete(customer);
                     VisualInterface.GreenColor("Customer deleted successfully.");
                     return;
                 }

@@ -16,7 +16,7 @@ public class Customer : Person
         {
             Console.Clear();
             Console.WriteLine($"Pets of {Name} {LastName}:");
-            VisualInterface.RedColor("[x] No pets available.");
+            
             if (Pets == null || Pets.Count == 0)
             {
                 VisualInterface.RedColor("No pets registered for this customer.");

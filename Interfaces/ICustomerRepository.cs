@@ -1,12 +1,10 @@
-namespace Healt_Clinict.Interfaces;
+using Healt_Clinict.obj.Models;
 
-public interface ICustomerRepository
+namespace Healt_Clinict.Interfaces
 {
-    void RegisterCustomer();
-    void viewcustomerinformation();
-
-    void DeleteCustomer();
-    void UpdateCustomer();
-
-
+    public interface ICustomerRepository
+    {
+        void Register(Customer newCustomer);  
+        void Delete(Customer customer);       
+    }
 }

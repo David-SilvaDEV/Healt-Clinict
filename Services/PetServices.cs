@@ -5,7 +5,10 @@ using  Healt_Clinict.database;
 namespace Healt_Clinict.Services;
 
 public class PetServices
+
+
 {
+    PetRepository petRepository = new PetRepository();
     public Pet RegisterPet()
     {
         VisualInterface.Interface("Register Pet");
@@ -192,7 +195,7 @@ public class PetServices
                 var petToRemove = customer.Pets.FirstOrDefault(p => p.Name.Equals(petName, StringComparison.OrdinalIgnoreCase));
                 if (petToRemove != null)
                 {
-                    PetRepository.Delete(petToRemove);
+                    petRepository.Delete(petToRemove);
                     VisualInterface.GreenColor($"Pet '{petName}' removed successfully.");
                 }
                 else
@@ -204,9 +207,57 @@ public class PetServices
             }
         }
 
-    }
+    }    //------------------------------------------------------------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------------------------------------------------------------
+
+        public void UpdatePet()
+    {
+        VisualInterface.Interface("Update Pet");
+
+        Console.WriteLine("Enter the name of the pet to update:");
+        string petName = Console.ReadLine() ?? "";
+        Console.WriteLine("Enter the document number of the pet owner:");
+        string ownerDocument = Console.ReadLine() ?? "";
+
+        foreach (var customer in Warehouse.customers)
+        {
+            if (customer.NumberDocument.Equals(ownerDocument, StringComparison.OrdinalIgnoreCase))
+            {
+                var petToUpdate = customer.Pets.FirstOrDefault(p => p.Name.Equals(petName, StringComparison.OrdinalIgnoreCase));
+                if (petToUpdate != null)
+                {
+                    Console.WriteLine("Enter new details for the pet (leave blank to keep current value):");
+
+                    Console.WriteLine($"Current Name: {petToUpdate.Name}. New Name:");
+                    string newName = Console.ReadLine() ?? "";
+                    if (!string.IsNullOrWhiteSpace(newName)) petToUpdate.Name = newName;
+
+                    Console.WriteLine($"Current Type: {petToUpdate.TypeAnimal}. New Type:");
+                    string newType = Console.ReadLine() ?? "";
+                    if (!string.IsNullOrWhiteSpace(newType)) petToUpdate.TypeAnimal = newType;
+
+                    Console.WriteLine($"Current Age: {petToUpdate.Age}. New Age:");
+                    string newAge = Console.ReadLine() ?? "";
+                    if (int.TryParse(newAge, out int age))
+                    {
+                        petToUpdate.Age = age;
+                    }
+
+                    Console.WriteLine($"Pet '{petName}' updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine($"No pet named '{petName}' found for this owner.");
+
+                }
+                Console.WriteLine("--------------------------------------------");
+                return;
+            }
+        }
+
+    }
 }
+
+
 
 

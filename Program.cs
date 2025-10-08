@@ -5,12 +5,16 @@ using Healt_Clinict.Services;
 using Healt_Clinict.obj.Models;
 using Healt_Clinict.ClassesSupport;
 using Health_Clinic.ClassesSupport;
+using Healt_Clinict.Utils;
 
 CustomerRepository customerRepository = new CustomerRepository();
+Menu menu = new Menu();
+
+menu.MainMenu();
 
 
 
-servicesMenu.MainMenu();
+
 
 //services.FilterPetAlfabeticName();
 

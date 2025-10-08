@@ -1,19 +1,16 @@
-using Healt_Clinict.obj.Models;
-using Healt_Clinict.repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Healt_Clinict.Services;
-using Healt_Clinict.Utils;
 
-namespace Healt_Clinict.Models;
+namespace Healt_Clinict.Utils;
 
-public class VisualInterfaceMenu
+public class Menu
 {
-
-    CustomerServices customerServices = new CustomerServices();
+    CustomerServices customerServices = new();
     PetServices petServices = new PetServices();
-
-
-    //----------------------------------------------------------------------------------------------------------
-    public  void MainMenu()
+    public void MainMenu()
     {
 
         {
@@ -161,6 +158,11 @@ public class VisualInterfaceMenu
                 break;
         }
 
+    }
+
+    public void EmployeeMenu()
+    {
+        
     }
 
 }
