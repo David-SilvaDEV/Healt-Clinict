@@ -115,7 +115,7 @@ public class CustomerServices
 
         if (customer == null)
         {
-            Console.WriteLine("Customer not found.");
+            VisualInterface.RedColor("[x]!Customer not found.");
             return;
         }
 
