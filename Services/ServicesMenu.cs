@@ -1,17 +1,19 @@
 using Healt_Clinict.obj.Models;
 using Healt_Clinict.repository;
+using Healt_Clinict.Services;
+using Healt_Clinict.Utils;
 
 namespace Healt_Clinict.Models;
 
-public class ServicesMenu
+public class VisualInterfaceMenu
 {
-   
-    CustomerRepository customerManager = new CustomerRepository();
-    PetRepository petManager = new PetRepository();
+
+    CustomerServices customerServices = new CustomerServices();
+    PetServices petServices = new PetServices();
 
 
     //----------------------------------------------------------------------------------------------------------
-    public void MainMenu()
+    public  void MainMenu()
     {
 
         {
@@ -39,7 +41,7 @@ public class ServicesMenu
                     Console.WriteLine("Exiting the program. Goodbye!");
                     return;
                 default:
-                    Console.WriteLine("Invalid option. Please try again.");
+                    VisualInterface.RedColor("Invalid option. Please try again.");
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                     MainMenu();
@@ -51,7 +53,7 @@ public class ServicesMenu
 
     public void CustomerMenu()
     {
-        Services.Interface(" Customer Menu");
+        VisualInterface.Interface(" Customer Menu");
         Console.WriteLine("[1] -Register customer");
         Console.WriteLine("[2] -View customer information");
         Console.WriteLine("[3] -Update customer information");
@@ -61,21 +63,21 @@ public class ServicesMenu
         switch (answer)
         {
             case "1":
-                //Services.RegisterCustomer();
-                customerManager.RegisterCustomer();
+                //VisualInterface.RegisterCustomer();
+                customerServices.RegisterCustomer();
 
                 break;
             case "2":
 
-                customerManager.viewcustomerinformation();
+                customerServices.viewcustomerinformation();
 
                 break;
             case "3":
-                customerManager.UpdateCustomer();
+                customerServices.UpdateCustomer();
 
                 break;
             case "4":
-                customerManager.DeleteCustomer();
+                customerServices.DeleteCustomer();
 
                 break;
             case "5":
@@ -92,7 +94,7 @@ public class ServicesMenu
 
     public void PetsMenu()
     {
-        Services.Interface(" Pets Menu");
+        VisualInterface.Interface(" Pets Menu");
         Console.WriteLine("[1] -Register pet");
         Console.WriteLine("[2] -View pet information");
         Console.WriteLine("[3] -Update pet information");
@@ -102,17 +104,17 @@ public class ServicesMenu
         switch (answer)
         {
             case "1":
-                //Services.RegisterPet();
-                customerManager.RegisterCustomer();
+                //VisualInterface.RegisterPet();
+                customerServices.RegisterCustomer();
                 break;
             case "2":
                 ShowInformationPets();
                 break;
             case "3":
-                customerManager.UpdateCustomer();
+                customerServices.UpdateCustomer();
                 break;
             case "4":
-                customerManager.DeleteCustomer();
+                customerServices.DeleteCustomer();
                 break;
             case "5":
                 MainMenu();
@@ -127,7 +129,7 @@ public class ServicesMenu
 
     public void ShowInformationPets()
     {
-        Services.Interface(" Information");
+        VisualInterface.Interface(" Information");
         Console.WriteLine("[1] -View all pets");
         Console.WriteLine("[2] -View pet by type");
         Console.WriteLine("[3] -View pet by age");
@@ -138,16 +140,16 @@ public class ServicesMenu
         switch (answer)
         {
             case "1":
-                petManager.ShowAllPets();
+                petServices.ShowAllPets();
                 break;
             case "2":
-                petManager.FilterPetType();
+                petServices.FilterPetType();
                 break;
             case "3":
-                petManager.FilterPetAgeMoreless();
+                petServices.FilterPetAgeMoreless();
                 break;
             case "4":
-                petManager.FilterPetAlfabeticName();
+                petServices.FilterPetAlfabeticName();
                 break;
             case "5":
                 MainMenu();
