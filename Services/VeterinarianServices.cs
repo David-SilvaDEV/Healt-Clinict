@@ -72,6 +72,7 @@ public class VeterinarianServices
         NewVeterinarian.SetPhoneNumber(phoneNumber);
 
         VeterinarianRepository.Register(NewVeterinarian);
+        ServicesValidation.ReturnToMenu();
 
 
     }
@@ -104,6 +105,7 @@ public class VeterinarianServices
 
         Console.WriteLine("\nVeterinarian details:\n");
         veterinarian.ShowFullInfo();
+        ServicesValidation.ReturnToMenu();
     }
     //----------------------------------------------------------------------------------------------
     public void DeleteVeterinarian()
@@ -141,7 +143,9 @@ public class VeterinarianServices
                 }
 
 
+
             }
+            ServicesValidation.ReturnToMenu();
         }
     }
     
@@ -230,11 +234,12 @@ public class VeterinarianServices
                 {
                     ServicesValidation.ReturnToMenu();
                 }
-
+               
                
 
                 Console.WriteLine($"veterinarian {veterinarian.Name} information updated successfully.");
                 Console.WriteLine("----------------------------------------");
+                ServicesValidation.ReturnToMenu();
                 return;
             }
         }

@@ -16,7 +16,7 @@ public class CustomerServices
 {
     CustomerRepository customerRepository = new CustomerRepository();
     PetRepository petRepository = new PetRepository();
-    public  void RegisterCustomer()
+    public void RegisterCustomer()
     {
 
         VisualInterface.Interface("Register Customer");
@@ -77,7 +77,7 @@ public class CustomerServices
         NewCustomer.SetEmail(email);
         NewCustomer.SetPhoneNumber(phoneNumber);
 
-        
+
 
         // Registrar mascota (ya devuelve el objeto Pet)
         PetServices petServices = new PetServices();
@@ -139,14 +139,16 @@ public class CustomerServices
         else
         {
             VisualInterface.RedColor("[X] Invalid option.");
-
-            return;
-
         }
-
         ServicesValidation.ReturnToMenu();
 
+
+        return;
+
     }
+
+
+
     //---------------------------------------------------------------------------------------
 
     public void DeleteCustomer()
@@ -243,7 +245,7 @@ public class CustomerServices
                 }
 
 
-                else if (field == "3")
+                else if (field == "4")
                 {
                     Console.WriteLine("Enter new email (or press Enter to keep current): ");
                     string newEmail = Console.ReadLine() ?? "";
@@ -254,14 +256,14 @@ public class CustomerServices
                 }
 
 
-                else if (field == "4")
+                else if (field == "5")
                 {
 
                     Console.WriteLine("Enter new phone number (or press Enter to keep current): ");
                     string newPhoneNumber = Console.ReadLine() ?? "";
                     if (!string.IsNullOrWhiteSpace(newPhoneNumber))
                     {
-                         customer.SetPhoneNumber(newPhoneNumber);
+                        customer.SetPhoneNumber(newPhoneNumber);
                     }
 
                 }
@@ -271,12 +273,23 @@ public class CustomerServices
                     ServicesValidation.ReturnToMenu();
                 }
 
-               
 
-                Console.WriteLine($"Customer {customer.Name} information updated successfully.");
+
+                VisualInterface.RedColor($"Customer {customer.Name} information updated successfully.");
                 Console.WriteLine("----------------------------------------");
+                ServicesValidation.ReturnToMenu();
                 return;
+
+
+
             }
+
+            else
+            {
+                VisualInterface.RedColor("[X] wrong information *-*");
+                ServicesValidation.ReturnToMenu();
+            }
+            ;
         }
     }
 }

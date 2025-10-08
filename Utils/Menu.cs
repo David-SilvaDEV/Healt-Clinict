@@ -104,16 +104,16 @@ public class Menu
         {
             case "1":
                 //VisualInterface.RegisterPet();
-                customerServices.RegisterCustomer();
+                petServices.Registeronlypet();
                 break;
             case "2":
                 ShowInformationPets();
                 break;
             case "3":
-                customerServices.UpdateCustomer();
+                petServices.UpdatePet();
                 break;
             case "4":
-                customerServices.DeleteCustomer();
+                petServices.DeletePet();
                 break;
             case "5":
                 MainMenu();

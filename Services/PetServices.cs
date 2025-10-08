@@ -1,6 +1,6 @@
 using Healt_Clinict.obj.Models;
 using Healt_Clinict.Utils;
-using  Healt_Clinict.database;
+using Healt_Clinict.database;
 
 namespace Healt_Clinict.Services;
 
@@ -56,6 +56,7 @@ public class PetServices
         // devolver la mascota para que el llamador la asigne al cliente
         return newPet;
 
+
     }
 
 
@@ -80,17 +81,28 @@ public class PetServices
             )
         );
 
+        // Verificar si se encontró el cliente
         if (customer == null)
         {
             Console.WriteLine("No customer found with that ID and name. Please verify the details or create a new one first.");
-            return;
+            return;  // Salir si no se encuentra el cliente
         }
 
-        Pet newPet = RegisterPet();
+        // Registrar la nueva mascota
+        Pet newPet = RegisterPet();  // Llamamos al método RegisterPet()
+
+        // Asignar el dueño (customer) a la mascota
         newPet.Owner = customer;
 
+        // Agregar la nueva mascota a la lista de mascotas del cliente
+        customer.Pets.Add(newPet);
+
         Console.WriteLine("Pet registered and associated with the client correctly.");
+
+        // Devolver al menú o continuar con la lógica posterior
+        ServicesValidation.ReturnToMenu();
     }
+
 
     //--------------------------------------------------------------------------------------------------------------------------------------------
     public void FilterPetType()
@@ -118,6 +130,7 @@ public class PetServices
             Console.WriteLine($"- Name: {pet.Name} | ({pet.Age} years old) | Symptoms: ({pet.Symptoms}), Owner: {pet.Owner.Name} {pet.Owner.LastName} ");
         }
         Console.WriteLine("--------------------------------------------");
+        ServicesValidation.ReturnToMenu();
 
     }
     //-------------------------------------------------------------------------------------------------------------------------
@@ -134,6 +147,7 @@ public class PetServices
         {
             Console.WriteLine($"- {pet.Age} years old,| Name: {pet.Name} |Type: ({pet.TypeAnimal}),  Owner: {pet.Owner.Name}");
         }
+        ServicesValidation.ReturnToMenu();
     }
     //-----------------------------------------------------------------------------------------------------------
 
@@ -151,6 +165,7 @@ public class PetServices
             Console.WriteLine($"- Name: {pet.Name} | Type: ({pet.TypeAnimal}), Age: ({pet.Age} years old), Owner: {pet.Owner.Name}");
         }
         Console.WriteLine("--------------------------------------------");
+        ServicesValidation.ReturnToMenu();
     }
 
     //-------------------------------------------------------------------------------------------------------------------
@@ -159,25 +174,29 @@ public class PetServices
     {
         VisualInterface.Interface("All Registered Pets");
 
+        // Obtenemos todas las mascotas de todos los clientes
         var allPets = Warehouse.customers
             .SelectMany(c => c.Pets);
 
+
         if (!allPets.Any())
         {
-            Console.WriteLine("No pets registered.");
+            VisualInterface.RedColor("[X]No pets registered. (*-*) ");
             return;
-
         }
 
         Console.WriteLine("List of all registered pets:");
 
-        Pet pet = new Pet();
-        pet.ShowAllAnimals();
+
+        foreach (var pet in allPets)
+        {
+            pet.ShowAllAnimals();
+        }
 
         Console.WriteLine("------------------------------------------------");
-
-
+        ServicesValidation.ReturnToMenu();
     }
+
 
     public void DeletePet()
     {
@@ -203,6 +222,7 @@ public class PetServices
                     VisualInterface.RedColor($"No pet named '{petName}' found for this owner.");
                 }
                 Console.WriteLine("--------------------------------------------");
+                ServicesValidation.ReturnToMenu();
                 return;
             }
         }
@@ -210,7 +230,7 @@ public class PetServices
     }    //------------------------------------------------------------------------------------------------------------------------------------
 
 
-        public void UpdatePet()
+    public void UpdatePet()
     {
         VisualInterface.Interface("Update Pet");
 
@@ -251,6 +271,7 @@ public class PetServices
 
                 }
                 Console.WriteLine("--------------------------------------------");
+
                 return;
             }
         }

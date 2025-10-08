@@ -12,6 +12,9 @@ Menu menu = new Menu();
 
 menu.MainMenu();
 
+// Pet pet = new Pet();
+// pet.ShowAllAnimals();
+
 
 
 
