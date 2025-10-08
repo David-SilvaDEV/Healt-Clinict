@@ -76,9 +76,11 @@ public class CustomerServices
         NewCustomer.SetEmail(email);
         NewCustomer.SetPhoneNumber(phoneNumber);
 
+        
 
-        // Registrar la mascota y asociarla al cliente creado
-        Pet newPet = petRepository.RegisterPet();
+        // Registrar mascota (ya devuelve el objeto Pet)
+        PetServices petServices = new PetServices();
+        Pet newPet = petServices.RegisterPet();
         newPet.Owner = NewCustomer;
         NewCustomer.Pets.Add(newPet);
 

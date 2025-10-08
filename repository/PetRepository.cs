@@ -7,14 +7,15 @@ using Healt_Clinict.Utils;
 
 
 
-public class PetRepository
+public  class PetRepository
     {
     Customer customer = new Customer();
 
+
     public static void Register(Pet newPet)
     {
-        Warehouse.customers.
-       
+        Warehouse.customers.ForEach(c => c.Pets.Add(newPet));
+
     }
    
 
@@ -26,11 +27,11 @@ public class PetRepository
 
     public void FilterPetType()
     {
-        Services.Interface("Filter Pets by Type");
+        VisualInterface.Interface("Filter Pets by Type");
 
         // Mostrar los tipos únicos
         Console.WriteLine("Types of registered animals:");
-        foreach (var pet in Warehouse._customers.SelectMany(c => c.Pets).DistinctBy(p => p.TypeAnimal))
+        foreach (var pet in Warehouse.customers.SelectMany(c => c.Pets).DistinctBy(p => p.TypeAnimal))
         {
             Console.WriteLine($"- {pet.TypeAnimal}");
         }
@@ -39,7 +40,7 @@ public class PetRepository
         string typeAnimal = Console.ReadLine() ?? "";
 
         // Filtrar y mostrar todas las mascotas de ese tipo
-        var filteredPets = Warehouse._customers
+        var filteredPets = Warehouse.customers
             .SelectMany(c => c.Pets)
             .Where(p => p.TypeAnimal.Equals(typeAnimal, StringComparison.OrdinalIgnoreCase));
 
@@ -54,9 +55,9 @@ public class PetRepository
 
     public void FilterPetAgeMoreless()
     {
-        Services.Interface("Filter Pets by Age");
+        VisualInterface.Interface("Filter Pets by Age");
 
-        var sortedPets = Warehouse._customers
+        var sortedPets = Warehouse.customers
             .SelectMany(c => c.Pets)
             .OrderByDescending(p => p.Age); // mayor a menor
 
@@ -70,9 +71,9 @@ public class PetRepository
 
     public void FilterPetAlfabeticName()
     {
-        Services.Interface("Filter Pets by Name (Alphabetically)");
+        VisualInterface.Interface("Filter Pets by Name (Alphabetically)");
 
-        var sortedPets = Warehouse._customers
+        var sortedPets = Warehouse.customers
             .SelectMany(c => c.Pets)
             .OrderBy(p => p.Name); // Ordenar alfabéticamente por nombre
 
@@ -86,9 +87,9 @@ public class PetRepository
 
     public void ShowAllPets()
     {
-        Services.Interface("All Registered Pets");
+        VisualInterface.Interface("All Registered Pets");
 
-        var allPets = Warehouse._customers
+        var allPets = Warehouse.customers
             .SelectMany(c => c.Pets);
 
         if (!allPets.Any())
@@ -108,14 +109,14 @@ public class PetRepository
 
     public void DeletePet()
     {
-        Services.Interface("Delete Pet");
+        VisualInterface.Interface("Delete Pet");
 
         Console.WriteLine("Enter the name of the pet to delete:");
         string petName = Console.ReadLine() ?? "";
         Console.WriteLine("Enter the document number of the pet owner:");
         string ownerDocument = Console.ReadLine() ?? "";
 
-        foreach (var customer in Warehouse._customers)
+        foreach (var customer in Warehouse.customers)
         {
             if (customer.NumberDocument.Equals(ownerDocument, StringComparison.OrdinalIgnoreCase))
             {
@@ -139,14 +140,14 @@ public class PetRepository
 
     public void UpdatePet()
     {
-        Services.Interface("Update Pet");
+        VisualInterface.Interface("Update Pet");
 
         Console.WriteLine("Enter the name of the pet to update:");
         string petName = Console.ReadLine() ?? "";
         Console.WriteLine("Enter the document number of the pet owner:");
         string ownerDocument = Console.ReadLine() ?? "";
 
-        foreach (var customer in Warehouse._customers)
+        foreach (var customer in Warehouse.customers)
         {
             if (customer.NumberDocument.Equals(ownerDocument, StringComparison.OrdinalIgnoreCase))
             {
