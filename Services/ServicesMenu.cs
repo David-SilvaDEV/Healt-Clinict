@@ -5,7 +5,7 @@ namespace Healt_Clinict.Models;
 
 public class ServicesMenu
 {
-    Services Services = new Services();
+   
     CustomerRepository customerManager = new CustomerRepository();
     PetRepository petManager = new PetRepository();
 

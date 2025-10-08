@@ -6,8 +6,8 @@ namespace Healt_Clinict.database;
 
 public static class Warehouse
 {
-    public static List<Veterinarian> _veterinarians = [];
-    public static List<Customer> _customers = new()
+    public static List<Veterinarian> veterinarians = [];
+    public static List<Customer> customers = new()
     {
         new Customer
         {
@@ -17,8 +17,8 @@ public static class Warehouse
             Age = 28,
             TypeDocument = "CC",
             NumberDocument = "1002456789",
-            Email = "carlos.ramirez@example.com",
-            PhoneNumber = "3004567890",
+            //Email = "carlos.ramirez@example.com",
+            //PhoneNumber = "3004567890",
             Pets = new List<Pet>()
             {
                 new Pet("Firulais", "Perro", "Macho", 3, "Marrón", "15kg", "Sano", null!) // asignaremos Owner luego
@@ -32,8 +32,8 @@ public static class Warehouse
             Age = 34,
             TypeDocument = "CC",
             NumberDocument = "1003987654",
-            Email = "laura.gomez@example.com",
-            PhoneNumber = "3019876543",
+            //Email = "laura.gomez@example.com",
+            // PhoneNumber = "3019876543",
             Pets = new List<Pet>()
             {
                 new Pet("Michi", "Gato", "Hembra", 2, "Blanco", "4kg", "Resfriado leve", null!)
@@ -47,8 +47,8 @@ public static class Warehouse
             Age = 22,
             TypeDocument = "TI",
             NumberDocument = "1122334455",
-            Email = "andres.torres@example.com",
-            PhoneNumber = "3021234567",
+            //Email = "andres.torres@example.com",
+            //PhoneNumber = "3021234567",
             Pets = new List<Pet>()
             {
                 new Pet("Rex", "Perro", "Macho", 5, "Negro", "20kg", "Cojea", null!)
@@ -62,8 +62,8 @@ public static class Warehouse
             Age = 29,
             TypeDocument = "CC",
             NumberDocument = "1005678912",
-            Email = "valentina.martinez@example.com",
-            PhoneNumber = "3156789123",
+            //Email = "valentina.martinez@example.com",
+            //PhoneNumber = "3156789123",
             Pets = new List<Pet>()
             {
                 new Pet("Luna", "Conejo", "Hembra", 1, "Gris", "1.5kg", "Sano", null!)
@@ -77,8 +77,8 @@ public static class Warehouse
             Age = 40,
             TypeDocument = "CE",
             NumberDocument = "890123456",
-            Email = "miguel.suarez@example.com",
-            PhoneNumber = "3168901234",
+            //Email = "miguel.suarez@example.com",
+            //PhoneNumber = "3168901234",
             Pets = new List<Pet>()
             {
                 new Pet("Rocky", "Perro", "Macho", 7, "Café", "25kg", "Dolor en la pata", null!)

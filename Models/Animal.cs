@@ -13,8 +13,7 @@ public abstract class Animal
     public string Weight { get; set; }
     public string Symptoms { get; set; }
 
-
-
-
+    
+   
 }
 
