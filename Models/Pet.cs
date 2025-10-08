@@ -4,8 +4,8 @@ using Healt_Clinict.Models;
 namespace Healt_Clinict.obj.Models
 {
     public class Pet : Animal
-    {   
-        
+    {
+
         public Customer Owner { get; set; }
 
         // Constructor dentro de la clase
@@ -18,7 +18,7 @@ namespace Healt_Clinict.obj.Models
             Color = color;
             Weight = weight;
             Symptoms = symptoms;
-            Owner = owner; 
+            Owner = owner;
         }
         public Pet() { }
 
@@ -32,6 +32,12 @@ namespace Healt_Clinict.obj.Models
             Weight = weight;
             Symptoms = symptoms;
         }
+        
+         public void ShowAllAnimals()    
+    {
+            Console.WriteLine($"- Name: {Name} | Type: ({TypeAnimal}), Age: ({Age} years old), Owner: {Owner.Name} {Owner.NumberDocument}");
+        
+    }
     }
 }
 

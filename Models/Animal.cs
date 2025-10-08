@@ -4,7 +4,7 @@ namespace Healt_Clinict.Models;
 
 public abstract class Animal
 {
-    
+
     public string Name { get; set; }
     public string TypeAnimal { get; set; }
     public string Sex { get; set; }
@@ -13,7 +13,7 @@ public abstract class Animal
     public string Weight { get; set; }
     public string Symptoms { get; set; }
 
-    
+   
    
 }
 
