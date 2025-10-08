@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using Healt_Clinict.Services;
@@ -8,6 +9,7 @@ namespace Healt_Clinict.Utils;
 
 public class Menu
 {
+    VeterinarianServices veterinarianServices = new VeterinarianServices();
     CustomerServices customerServices = new();
     PetServices petServices = new PetServices();
     public void MainMenu()
@@ -32,7 +34,7 @@ public class Menu
                     PetsMenu();
                     break;
                 case "3":
-
+                    EmployeeMenu();
                     break;
                 case "4":
                     Console.WriteLine("Exiting the program. Goodbye!");
@@ -162,7 +164,67 @@ public class Menu
 
     public void EmployeeMenu()
     {
-        
+        VisualInterface.Interface("Employee Menu");
+        Console.WriteLine("[1] Veterinarian");
+        Console.WriteLine("[2] Exit");
+
+
+        string answer = Console.ReadLine() ?? "";
+        switch (answer)
+        {
+            case "1":
+                VeterinaryMenu();
+                break;
+            case "2":
+                MainMenu();
+                break;
+            default:
+                Console.WriteLine("Invalid option. Please try again.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                break;
+        }
+
+    }
+
+    public void VeterinaryMenu()
+    {
+        VisualInterface.Interface(" Veterinarian Menu");
+        Console.WriteLine("[1] -Register Veterinarian");
+        Console.WriteLine("[2] -View Veterinarian information");
+        Console.WriteLine("[3] -Update Veterinarian information");
+        Console.WriteLine("[4] -Delete Veterinarian");
+        Console.WriteLine("[5] -Return to main menu");
+        string answer = Console.ReadLine() ?? "";
+        switch (answer)
+        {
+            case "1":
+                //VisualInterface.RegisterCustomer();
+                veterinarianServices.RegisterVeterinarian();
+
+                break;
+            case "2":
+
+                veterinarianServices.viewVeterinarianinformation();
+
+                break;
+            case "3":
+                veterinarianServices.UpdateVeterinarian();
+
+                break;
+            case "4":
+                veterinarianServices.DeleteVeterinarian();
+
+                break;
+            case "5":
+                MainMenu();
+                break;
+            default:
+                Console.WriteLine("Invalid option. Please try again.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                break;
+        }
     }
 
 }
