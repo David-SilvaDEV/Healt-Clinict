@@ -286,7 +286,7 @@ public class CustomerServices
 
             else
             {
-                VisualInterface.RedColor("[X] wrong information *-*");
+                VisualInterface.RedColor("[X] wrong information (*-*)");
                 ServicesValidation.ReturnToMenu();
             }
             ;

@@ -9,6 +9,7 @@ namespace Healt_Clinict.Utils;
 
 public class Menu
 {
+    
     VeterinarianServices veterinarianServices = new VeterinarianServices();
     CustomerServices customerServices = new();
     PetServices petServices = new PetServices();
@@ -83,9 +84,7 @@ public class Menu
                 MainMenu();
                 break;
             default:
-                Console.WriteLine("Invalid option. Please try again.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
+                ServicesValidation.ReturnToMenu();
                 break;
         }
 
@@ -119,9 +118,7 @@ public class Menu
                 MainMenu();
                 break;
             default:
-                Console.WriteLine("Invalid option. Please try again.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
+                ServicesValidation.ReturnToMenu();
                 break;
         }
     }
@@ -154,9 +151,7 @@ public class Menu
                 MainMenu();
                 break;
             default:
-                Console.WriteLine("Invalid option. Please try again.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
+                 ServicesValidation.ReturnToMenu();
                 break;
         }
 
@@ -179,9 +174,7 @@ public class Menu
                 MainMenu();
                 break;
             default:
-                Console.WriteLine("Invalid option. Please try again.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
+                ServicesValidation.ReturnToMenu();
                 break;
         }
 
@@ -220,9 +213,7 @@ public class Menu
                 MainMenu();
                 break;
             default:
-                Console.WriteLine("Invalid option. Please try again.");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
+                ServicesValidation.ReturnToMenu();
                 break;
         }
     }

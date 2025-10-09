@@ -10,7 +10,7 @@ public class ServicesValidation
     public static void ReturnToMenu()
     {   
 
-        Console.WriteLine("Press any key to continue...");
+        VisualInterface.YellowColor("Press any key to continue...");
         Console.ReadKey();
         menu.MainMenu();
 

@@ -6,7 +6,7 @@ public static class VisualInterface
     public static void Interface(string sectionName)
     {
         Console.Clear();
-        Console.WriteLine($"-[section of {sectionName}]-");
+        BlueyColor($"-[section of {sectionName}]-");
 
 
 
@@ -32,5 +32,24 @@ public static class VisualInterface
         // Restaura el color predeterminado
         Console.ResetColor();
 
+    }
+
+    public static void YellowColor(string TexColor)
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"{TexColor}");
+
+        // Restaura el color predeterminado
+        Console.ResetColor();
+
+    }
+
+    public static void BlueyColor(string TexColor)
+    {
+        Console.ForegroundColor = ConsoleColor.DarkBlue;
+        Console.WriteLine($"{TexColor}");
+
+        // Restaura el color predeterminado
+        Console.ResetColor();
     }
 }

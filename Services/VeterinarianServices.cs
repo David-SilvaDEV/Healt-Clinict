@@ -72,6 +72,7 @@ public class VeterinarianServices
         NewVeterinarian.SetPhoneNumber(phoneNumber);
 
         VeterinarianRepository.Register(NewVeterinarian);
+        VisualInterface.GreenColor("Veterinarian added successfully!");
         ServicesValidation.ReturnToMenu();
 
 
@@ -122,7 +123,7 @@ public class VeterinarianServices
         {
             Console.WriteLine("write the veterinarian document number to delete: ");
             string documentNumber = Console.ReadLine() ?? "";
-            Console.WriteLine("write the type of client document: ");
+            Console.WriteLine("write the type of veterinarian document: ");
             string typeDocument = Console.ReadLine() ?? "";
             foreach (var veterinarian in Warehouse.veterinarians)
             {
@@ -138,6 +139,7 @@ public class VeterinarianServices
                 {
                     VisualInterface.RedColor("[x] Veterinarian not found. (*-*)");
                     Console.WriteLine("----------------------------------------");
+                    ServicesValidation.ReturnToMenu();
                     return;
 
                 }
@@ -145,8 +147,9 @@ public class VeterinarianServices
 
 
             }
-            ServicesValidation.ReturnToMenu();
+
         }
+        ServicesValidation.ReturnToMenu();
     }
     
 
@@ -207,7 +210,7 @@ public class VeterinarianServices
                 }
 
 
-                else if (field == "3")
+                else if (field == "4")
                 {
                     Console.WriteLine("Enter new email (or press Enter to keep current): ");
                     string newEmail = Console.ReadLine() ?? "";
@@ -218,14 +221,14 @@ public class VeterinarianServices
                 }
 
 
-                else if (field == "4")
+                else if (field == "5")
                 {
 
                     Console.WriteLine("Enter new phone number (or press Enter to keep current): ");
                     string newPhoneNumber = Console.ReadLine() ?? "";
                     if (!string.IsNullOrWhiteSpace(newPhoneNumber))
                     {
-                         veterinarian.SetPhoneNumber(newPhoneNumber);
+                        veterinarian.SetPhoneNumber(newPhoneNumber);
                     }
 
                 }
@@ -234,13 +237,20 @@ public class VeterinarianServices
                 {
                     ServicesValidation.ReturnToMenu();
                 }
-               
-               
+
+
 
                 Console.WriteLine($"veterinarian {veterinarian.Name} information updated successfully.");
                 Console.WriteLine("----------------------------------------");
                 ServicesValidation.ReturnToMenu();
                 return;
+
+            }
+            
+             else
+            {
+                VisualInterface.RedColor("[X] wrong information (*-*)");
+                ServicesValidation.ReturnToMenu();
             }
         }
     }

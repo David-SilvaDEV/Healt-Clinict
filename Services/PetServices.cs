@@ -127,6 +127,7 @@ public class PetServices
         Console.WriteLine($"\nPets of type '{typeAnimal}':");
         foreach (var pet in filteredPets)
         {
+            
             Console.WriteLine($"- Name: {pet.Name} | ({pet.Age} years old) | Symptoms: ({pet.Symptoms}), Owner: {pet.Owner.Name} {pet.Owner.LastName} ");
         }
         Console.WriteLine("--------------------------------------------");

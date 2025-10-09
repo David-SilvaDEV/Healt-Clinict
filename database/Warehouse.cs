@@ -21,7 +21,7 @@ public static class Warehouse
             //PhoneNumber = "3004567890",
             Pets = new List<Pet>()
             {
-                new Pet("Firulais", "Perro", "Macho", 3, "Marrón", "15kg", "Sano", null!) // asignaremos Owner luego
+                new Pet("Firulais", "Perro", "Macho", 3, "Marrón", "15kg", "Sano", null!) 
             }
         },
         new Customer
