@@ -220,7 +220,8 @@ public class PetServices
                 }
                 else
                 {
-                    VisualInterface.RedColor($"No pet named '{petName}' found for this owner.");
+                    VisualInterface.RedColor($" [X]No pet named '{petName}' found for this owner. (-_*)");
+                    ServicesValidation.ReturnToMenu();
                 }
                 Console.WriteLine("--------------------------------------------");
                 ServicesValidation.ReturnToMenu();
@@ -268,11 +269,12 @@ public class PetServices
                 }
                 else
                 {
-                    Console.WriteLine($"No pet named '{petName}' found for this owner.");
+                    VisualInterface.RedColor($" [X] No pet named '{petName}' found for this owner (-_*).");
+                    ServicesValidation.ReturnToMenu();
 
                 }
                 Console.WriteLine("--------------------------------------------");
-
+                 ServicesValidation.ReturnToMenu();
                 return;
             }
         }

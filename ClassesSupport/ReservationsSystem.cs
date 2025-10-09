@@ -1,5 +1,6 @@
 using System.Globalization;
 using Healt_Clinict.ClassesSupport;
+using Healt_Clinict.Utils;
 using Calendar = System.Globalization.Calendar;
 
 
@@ -99,7 +100,7 @@ namespace Health_Clinic.ClassesSupport
                 }
                 else
                 {
-                    Console.WriteLine("Invalid time format.");
+                    VisualInterface.RedColor("Invalid time format.");
                 }
             }
             else

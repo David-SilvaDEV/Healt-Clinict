@@ -100,7 +100,8 @@ public class VeterinarianServices
 
         if (veterinarian == null)
         {
-            VisualInterface.RedColor("Veterinarian not found.");
+            VisualInterface.RedColor("[X] Veterinarian not found.(*-*)");
+            ServicesValidation.ReturnToMenu();
             return;
         }
 
@@ -154,22 +155,30 @@ public class VeterinarianServices
     
 
     public void UpdateVeterinarian()
+{
+    VisualInterface.Interface(" Update Veterinarian");
+
+    Console.WriteLine("Enter the name of the Veterinarian you want to update: ");
+    string Uname = Console.ReadLine() ?? "";
+    Console.WriteLine("Enter the document number: ");
+    string Udocument = Console.ReadLine() ?? "";
+    Console.WriteLine("Enter the type of document: ");
+    string UtypeDocument = Console.ReadLine() ?? "";
+
+    bool found = false;
+
+    foreach (var veterinarian in Warehouse.veterinarians)
     {
-        VisualInterface.Interface(" Update Veterinarian");
-
-        Console.WriteLine("Enter the name of the Veterinarian you want to update: ");
-        string Uname = Console.ReadLine() ?? "";
-        Console.WriteLine("Enter the document number: ");
-        string Udocument = Console.ReadLine() ?? "";
-        Console.WriteLine("Enter the type of document: ");
-        string UtypeDocument = Console.ReadLine() ?? "";
-
-        foreach (var veterinarian in Warehouse.veterinarians)
+        if (veterinarian.Name.Equals(Uname, StringComparison.OrdinalIgnoreCase) &&
+            veterinarian.NumberDocument.Equals(Udocument) &&
+            veterinarian.TypeDocument.Equals(UtypeDocument))
         {
-            if (veterinarian.Name.Equals(Uname) && veterinarian.NumberDocument.Equals(Udocument) && veterinarian.TypeDocument.Equals(UtypeDocument))
+            found = true;
 
+            bool updating = true;
+            while (updating)
             {
-                Console.WriteLine("Which client fields do you want to update?");
+                Console.WriteLine("Which veterinarian fields do you want to update?");
                 Console.WriteLine("[1] Name");
                 Console.WriteLine("[2] LastName");
                 Console.WriteLine("[3] Age");
@@ -179,79 +188,65 @@ public class VeterinarianServices
 
                 string field = Console.ReadLine() ?? "";
 
-                if (field == "1")
+                switch (field)
                 {
-                    Console.WriteLine("Enter new name (or press Enter to keep current): ");
-                    string newName = Console.ReadLine() ?? "";
-                    if (!string.IsNullOrWhiteSpace(newName))
-                    {
-                        veterinarian.Name = newName;
-                    }
+                    case "1":
+                        Console.WriteLine("Enter new name (or press Enter to keep current): ");
+                        string newName = Console.ReadLine() ?? "";
+                        if (!string.IsNullOrWhiteSpace(newName))
+                            veterinarian.Name = newName;
+                        break;
 
+                    case "2":
+                        Console.WriteLine("Enter new last name (or press Enter to keep current): ");
+                        string newLastName = Console.ReadLine() ?? "";
+                        if (!string.IsNullOrWhiteSpace(newLastName))
+                            veterinarian.LastName = newLastName;
+                        break;
+
+                    case "3":
+                        Console.WriteLine("Enter new age (or press Enter to keep current): ");
+                        string newAgeInput = Console.ReadLine() ?? "";
+                        if (int.TryParse(newAgeInput, out int newAge))
+                            veterinarian.Age = newAge;
+                        break;
+
+                    case "4":
+                        Console.WriteLine("Enter new email (or press Enter to keep current): ");
+                        string newEmail = Console.ReadLine() ?? "";
+                        if (!string.IsNullOrWhiteSpace(newEmail))
+                            veterinarian.SetEmail(newEmail);
+                        break;
+
+                    case "5":
+                        Console.WriteLine("Enter new phone number (or press Enter to keep current): ");
+                        string newPhoneNumber = Console.ReadLine() ?? "";
+                        if (!string.IsNullOrWhiteSpace(newPhoneNumber))
+                            veterinarian.SetPhoneNumber(newPhoneNumber);
+                        break;
+
+                    case "6":
+                        updating = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid option. Try again.");
+                        break;
                 }
-
-                else if (field == "2")
-                {
-                    Console.WriteLine("Enter new last name (or press Enter to keep current): ");
-                    string newLastName = Console.ReadLine() ?? "";
-                    if (!string.IsNullOrWhiteSpace(newLastName))
-                    {
-                        veterinarian.LastName = newLastName;
-                    }
-                }
-                else if (field == "3")
-                {
-                    Console.WriteLine("Enter new age (or press Enter to keep current): ");
-                    string newAgeInput = Console.ReadLine() ?? "";
-                    if (int.TryParse(newAgeInput, out int newAge))
-                    {
-                        veterinarian.Age = newAge;
-                    }
-                }
-
-
-                else if (field == "4")
-                {
-                    Console.WriteLine("Enter new email (or press Enter to keep current): ");
-                    string newEmail = Console.ReadLine() ?? "";
-                    if (!string.IsNullOrWhiteSpace(newEmail))
-                    {
-                        veterinarian.SetEmail(newEmail);
-                    }
-                }
-
-
-                else if (field == "5")
-                {
-
-                    Console.WriteLine("Enter new phone number (or press Enter to keep current): ");
-                    string newPhoneNumber = Console.ReadLine() ?? "";
-                    if (!string.IsNullOrWhiteSpace(newPhoneNumber))
-                    {
-                        veterinarian.SetPhoneNumber(newPhoneNumber);
-                    }
-
-                }
-
-                else
-                {
-                    ServicesValidation.ReturnToMenu();
-                }
-
-
-
-                Console.WriteLine($"veterinarian {veterinarian.Name} information updated successfully.");
-                Console.WriteLine("----------------------------------------");
-                ServicesValidation.ReturnToMenu();
-                return;
-
             }
-            
-             else
-            {
-                VisualInterface.RedColor("[X] wrong information (*-*)");
-                ServicesValidation.ReturnToMenu();
-            }
+
+            VisualInterface.RedColor($"Veterinarian {veterinarian.Name} information updated successfully.");
+            Console.WriteLine("----------------------------------------");
+            ServicesValidation.ReturnToMenu();
+            return;
         }
     }
+
+    if (!found)
+    {
+        VisualInterface.RedColor("[X] Wrong information -(*-*)-");
+        ServicesValidation.ReturnToMenu();
+    }
+}
+
 }
