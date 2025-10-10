@@ -11,6 +11,7 @@ namespace Healt_Clinict.Services;
 
 public class VeterinarianServices
 {
+    VeterinarianRepository veterinarianRepository = new VeterinarianRepository();
     public void RegisterVeterinarian()
     {
         VisualInterface.Interface("Register Veterinarian");
@@ -71,7 +72,7 @@ public class VeterinarianServices
         NewVeterinarian.SetEmail(email);
         NewVeterinarian.SetPhoneNumber(phoneNumber);
 
-        VeterinarianRepository.Register(NewVeterinarian);
+        veterinarianRepository.Register(NewVeterinarian);
         VisualInterface.GreenColor("Veterinarian added successfully!");
         ServicesValidation.ReturnToMenu();
 
@@ -131,7 +132,7 @@ public class VeterinarianServices
                 if (veterinarian.NumberDocument.Equals(documentNumber) && veterinarian.TypeDocument.Equals(typeDocument))
 
                 {
-                    VeterinarianRepository.Delete(veterinarian);
+                    veterinarianRepository.Delete(veterinarian);
                     VisualInterface.GreenColor("Veterinarian deleted successfully.");
                     return;
                 }
