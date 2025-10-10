@@ -1,6 +1,70 @@
 # Healt-Clinict
 # Health Clinic Management System
+# Health Clinic Management System
 
+## Description
+
+The **Health Clinic Management System** is a veterinary clinic management system that allows managing clients, pets, veterinarians, and appointments. Through this system, users can perform the following operations:
+- Register and manage clients and their pets.
+- Manage veterinarian information.
+- Schedule, view, reserve, and cancel appointments.
+- View available appointment calendars.
+
+The system is designed to run in a console and simulates an in-memory database using static lists.
+
+## Features
+
+- **Client Management**: Allows registering, updating, and deleting clients, as well as viewing their information.
+- **Pet Management**: Allows registering pets, associating them with clients, and viewing their information.
+- **Veterinarian Management**: Allows managing the clinic's veterinarians' information.
+- **Appointment Management**: Allows viewing, reserving, and canceling appointments for clients and their pets with available veterinarians.
+- **Appointment Calendar**: Allows generating and displaying the appointment calendar by month and day, with reservation options.
+
+## Project Structure
+
+### Main Classes:
+- **`Customer`**: Represents a client of the clinic.
+- **`Pet`**: Represents a pet that belongs to a client.
+- **`Veterinarian`**: Represents a veterinarian in the clinic.
+- **`Appointment`**: Represents a reserved appointment at the clinic.
+- **`AppointmentSystem`**: Manages the creation, reservation, and viewing of appointments.
+- **`ReservationsSystem`**: Manages appointments, displaying calendars, and reserving appointments.
+- **`Warehouse`**: Acts as an in-memory database, managing clients, pets, veterinarians, and appointments.
+- **`Menu`**: Console user interface for navigating the system's options.
+
+### Functionalities:
+1. **Client Management**:
+   - Register clients with personal data and associated pets.
+   - View, update, and delete client information.
+   
+2. **Pet Management**:
+   - Register, view, and update pet information.
+   
+3. **Veterinarian Management**:
+   - Register, view, update, and delete veterinarian information.
+   
+4. **Appointment Management**:
+   - Automatically generate appointments by month and year.
+   - View available appointments and reserve them for a client, a pet, and a veterinarian.
+   - View reserved appointments.
+
+5. **Calendar**:
+   - Display appointment calendars by month and day, allowing users to select and reserve appointments.
+
+## Requirements
+
+This project was developed in **C#** and requires the following tools to run:
+- **.NET Core 3.1 or higher**: To run the project in a C# development environment.
+- **Recommended IDE**: [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/).
+
+## Installation
+
+1. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/David-SilvaDEV/Healt-Clinict.git
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------
 ## Descripción
 
 El proyecto **Health Clinic Management System** es un sistema de gestión para una clínica veterinaria, que permite gestionar clientes, mascotas, veterinarios y citas. A través de este sistema, los usuarios pueden realizar las siguientes operaciones:
