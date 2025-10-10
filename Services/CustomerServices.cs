@@ -76,6 +76,9 @@ public class CustomerServices
         // Asignar el email y el teléfono usando los métodos SetEmail y SetPhoneNumber
         NewCustomer.SetEmail(email);
         NewCustomer.SetPhoneNumber(phoneNumber);
+        
+        VisualInterface.Animation("registering Customer.............");
+        VisualInterface.GreenColor("Customer added successfully!");
 
 
 
@@ -87,7 +90,9 @@ public class CustomerServices
 
         // Guardar el cliente para búsquedas posteriores (Registeronlypet)
         customerRepository.Register(NewCustomer);
-        VisualInterface.GreenColor("Customer added successfully!");
+        
+        VisualInterface.Animation("registering pet.............");
+        VisualInterface.GreenColor("pet added successfully!");
 
 
         ServicesValidation.ReturnToMenu();
@@ -115,6 +120,7 @@ public class CustomerServices
         Console.WriteLine("Which client do you want to see specifically? Enter their document number.");
         string specificClient = Console.ReadLine() ?? "";
         var customer = Warehouse.customers.FirstOrDefault(c => c.NumberDocument == specificClient);
+        VisualInterface.Animation("qualifying data.............");
 
         if (customer == null)
         {
@@ -126,6 +132,7 @@ public class CustomerServices
         Console.WriteLine("[1] - See information?");
         Console.WriteLine("[2] - See pets?");
         string answer = Console.ReadLine() ?? "";
+        VisualInterface.Animation("qualifying data.............");
 
         if (answer == "1")
         {
@@ -173,6 +180,7 @@ public class CustomerServices
                 if (customer.NumberDocument.Equals(documentNumber) && customer.TypeDocument.Equals(typeDocument))
 
                 {
+                    VisualInterface.Animation("deleting Customer.............");
                     customerRepository.Delete(customer);
                     VisualInterface.GreenColor("Customer deleted successfully.");
                     return;
@@ -180,6 +188,7 @@ public class CustomerServices
 
                 else
                 {
+                    VisualInterface.Animation("qualifying data.............");
                     VisualInterface.RedColor("Customer not found.");
                     return;
                 }
@@ -190,100 +199,107 @@ public class CustomerServices
 
 
     public void UpdateCustomer()
-{
-    VisualInterface.Interface(" Update Customer");
-
-    Console.WriteLine("Enter the name of the client you want to update: ");
-    string Uname = Console.ReadLine() ?? "";
-    Console.WriteLine("Enter the document number: ");
-    string Udocument = Console.ReadLine() ?? "";
-    Console.WriteLine("Enter the type of document: ");
-    string UtypeDocument = Console.ReadLine() ?? "";
-
-    bool found = false;
-
-    foreach (var customer in Warehouse.customers)
     {
-        if (customer.Name.Equals(Uname, StringComparison.OrdinalIgnoreCase) &&
-            customer.NumberDocument.Equals(Udocument) &&
-            customer.TypeDocument.Equals(UtypeDocument))
+        VisualInterface.Interface(" Update Customer");
+
+        Console.WriteLine("Enter the name of the client you want to update: ");
+        string Uname = Console.ReadLine() ?? "";
+        Console.WriteLine("Enter the document number: ");
+        string Udocument = Console.ReadLine() ?? "";
+        Console.WriteLine("Enter the type of document: ");
+        string UtypeDocument = Console.ReadLine() ?? "";
+
+        bool found = false;
+
+        foreach (var customer in Warehouse.customers)
         {
-            found = true;
-
-            bool updating = true;
-            while (updating)
+            if (customer.Name.Equals(Uname, StringComparison.OrdinalIgnoreCase) &&
+                customer.NumberDocument.Equals(Udocument) &&
+                customer.TypeDocument.Equals(UtypeDocument))
             {
-                Console.Clear();
-                Console.WriteLine("Which client fields do you want to update?");
-                Console.WriteLine("[1] Name");
-                Console.WriteLine("[2] LastName");
-                Console.WriteLine("[3] Age");
-                Console.WriteLine("[4] Email");
-                Console.WriteLine("[5] Phone Number");
-                Console.WriteLine("[6] Exit");
+                found = true;
 
-                string field = Console.ReadLine() ?? "";
-
-                switch (field)
+                bool updating = true;
+                while (updating)
                 {
-                    case "1":
-                        Console.WriteLine("Enter new name (or press Enter to keep current): ");
-                        string newName = Console.ReadLine() ?? "";
-                        if (!string.IsNullOrWhiteSpace(newName))
-                            customer.Name = newName;
-                        break;
+                    Console.Clear();
+                    Console.WriteLine("Which client fields do you want to update?");
+                    Console.WriteLine("[1] Name");
+                    Console.WriteLine("[2] LastName");
+                    Console.WriteLine("[3] Age");
+                    Console.WriteLine("[4] Email");
+                    Console.WriteLine("[5] Phone Number");
+                    Console.WriteLine("[6] Exit");
 
-                    case "2":
-                        Console.WriteLine("Enter new last name (or press Enter to keep current): ");
-                        string newLastName = Console.ReadLine() ?? "";
-                        if (!string.IsNullOrWhiteSpace(newLastName))
-                            customer.LastName = newLastName;
-                        break;
+                    string field = Console.ReadLine() ?? "";
+                    VisualInterface.Animation("qualifying data.............");
 
-                    case "3":
-                        Console.WriteLine("Enter new age (or press Enter to keep current): ");
-                        string newAgeInput = Console.ReadLine() ?? "";
-                        if (int.TryParse(newAgeInput, out int newAge))
-                            customer.Age = newAge;
-                        break;
+                    switch (field)
+                    {
+                        case "1":
+                            Console.WriteLine("Enter new name (or press Enter to keep current): ");
+                            string newName = Console.ReadLine() ?? "";
+                            if (!string.IsNullOrWhiteSpace(newName))
+                                customer.Name = newName;
+                            VisualInterface.Animation("updatting Customer.............");
 
-                    case "4":
-                        Console.WriteLine("Enter new email (or press Enter to keep current): ");
-                        string newEmail = Console.ReadLine() ?? "";
-                        if (!string.IsNullOrWhiteSpace(newEmail))
-                            customer.SetEmail(newEmail);
-                        break;
+                            break;
 
-                    case "5":
-                        Console.WriteLine("Enter new phone number (or press Enter to keep current): ");
-                        string newPhoneNumber = Console.ReadLine() ?? "";
-                        if (!string.IsNullOrWhiteSpace(newPhoneNumber))
-                            customer.SetPhoneNumber(newPhoneNumber);
-                        break;
+                        case "2":
+                            Console.WriteLine("Enter new last name (or press Enter to keep current): ");
+                            string newLastName = Console.ReadLine() ?? "";
+                            if (!string.IsNullOrWhiteSpace(newLastName))
+                                customer.LastName = newLastName;
+                            VisualInterface.Animation("updatting Customer.............");
+                            break;
 
-                    case "6":
-                        updating = false;
-                        break;
+                        case "3":
+                            Console.WriteLine("Enter new age (or press Enter to keep current): ");
+                            string newAgeInput = Console.ReadLine() ?? "";
+                            if (int.TryParse(newAgeInput, out int newAge))
+                                customer.Age = newAge;
+                            VisualInterface.Animation("updatting Customer.............");
+                            break;
 
-                    default:
-                        Console.WriteLine("Invalid option. Try again.");
-                        break;
+                        case "4":
+                            Console.WriteLine("Enter new email (or press Enter to keep current): ");
+                            string newEmail = Console.ReadLine() ?? "";
+                            if (!string.IsNullOrWhiteSpace(newEmail))
+                                customer.SetEmail(newEmail);
+                            VisualInterface.Animation("updatting Customer.............");
+                            break;
+
+                        case "5":
+                            Console.WriteLine("Enter new phone number (or press Enter to keep current): ");
+                            string newPhoneNumber = Console.ReadLine() ?? "";
+                            if (!string.IsNullOrWhiteSpace(newPhoneNumber))
+                                customer.SetPhoneNumber(newPhoneNumber);
+                            VisualInterface.Animation("updatting Customer.............");
+                            break;
+
+                        case "6":
+                            updating = false;
+                            break;
+
+                        default:
+                            Console.WriteLine("Invalid option. Try again.");
+                            break;
+                    }
                 }
-            }
 
-            VisualInterface.GreenColor($"Customer {customer.Name} information updated successfully.");
-            Console.WriteLine("----------------------------------------");
+                VisualInterface.GreenColor($"Customer {customer.Name} information updated successfully.");
+                Console.WriteLine("----------------------------------------");
+                ServicesValidation.ReturnToMenu();
+                return;
+            }
+        }
+
+        if (!found)
+        {
+            VisualInterface.RedColor("[X] wrong information (*-*)");
             ServicesValidation.ReturnToMenu();
-            return;
         }
     }
-
-    if (!found)
-    {
-        VisualInterface.RedColor("[X] wrong information (*-*)");
-        ServicesValidation.ReturnToMenu();
-    }
-}
 
 }
 

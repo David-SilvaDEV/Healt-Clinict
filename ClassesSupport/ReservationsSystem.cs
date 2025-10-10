@@ -1,112 +1,80 @@
-using System.Globalization;
-using Healt_Clinict.ClassesSupport;
 using Healt_Clinict.Utils;
-using Calendar = System.Globalization.Calendar;
+using Healt_Clinict.Services;
+using Healt_Clinict.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Healt_Clinict.database;
+using Healt_Clinict.obj.Models;
 
 
-namespace Health_Clinic.ClassesSupport
+namespace Healt_Clinict.ClassesSupport
 {
-    public class ReservationsSystem
+    public class AppointmentSystem
     {
-        private AppointmentSystem appointmentSystem = new AppointmentSystem ();
-
-        public ReservationsSystem()
+        // Suponemos Warehouse.appointments es tu "base de datos" en memoria
+        public AppointmentSystem()
         {
-            // Obtener el año actual
-            int currentYear = DateTime.Now.Year;
+            // Opcional: cargar citas desde base de datos si tienes persistencia real
+        }
 
-            // Solicitar al usuario solo el mes
-            Console.WriteLine("Enter the month (MM) to display available appointments:");
+        // Generar citas para un mes y año específicos y guardar en base de datos
+        public void GenerateAppointments(int month, int year)
+        {
+            int daysInMonth = DateTime.DaysInMonth(year, month);
 
-            string monthInput = Console.ReadLine() ?? "";
-            int month;
-
-            // Verificar si el mes ingresado es válido
-            if (int.TryParse(monthInput, out month) && month >= 1 && month <= 12)
+            for (int day = 1; day <= daysInMonth; day++)
             {
-                // Generar citas para el mes y año actuales
-                appointmentSystem.GenerateAppointments(month, currentYear);
+                for (int hour = 8; hour <= 17; hour++)  // De 8 AM a 5 PM
+                {
+                    for (int minute = 0; minute < 60; minute += 30)  // Intervalos de 30 minutos
+                    {
+                        DateTime dateTime = new DateTime(year, month, day, hour, minute, 0);
 
-                // Crear una instancia del calendario, pasando el sistema de citas
-                AppointmentCalendar calendar = new AppointmentCalendar(appointmentSystem);
-
-                // Mostrar el calendario con citas disponibles para el mes solicitado
-                Console.WriteLine($"\nDisplaying calendar for {new DateTime(currentYear, month, 1):MMMM yyyy}:\n");
-                calendar.DisplayCalendar(month, currentYear);
-
-                // Permitir que el usuario seleccione un día
-                AskForDay();
-            }
-            else
-            {
-                Console.WriteLine("Invalid month. Please enter a valid month (1-12).");
+                        // Solo agregar si no existe ya en la "base de datos"
+                        bool exists = Warehouse.appointments.Any(a => a.DateAndTime == dateTime);
+                        if (!exists)
+                        {
+                            Warehouse.appointments.Add(new Appointment(dateTime));
+                            // Aquí si usas DB real, insertarlo ahí también
+                        }
+                    }
+                }
             }
         }
 
-        // Método para preguntar el día y mostrar las citas disponibles
-        private void AskForDay()
+        // Reservar una cita y actualizar la base de datos
+        public bool ReserveAppointment(DateTime dateTime, Customer customer, Pet pet, Veterinarian veterinarian)
         {
-            Console.WriteLine("\nEnter the day (DD) to view available appointments:");
-            string dayInput = Console.ReadLine() ?? "";
-            int day;
+            var appointment = Warehouse.appointments.FirstOrDefault(a => a.DateAndTime == dateTime);
 
-            // Verificar si el día ingresado es válido
-            if (int.TryParse(dayInput, out day) && day >= 1 && day <= DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month))
+            if (appointment != null && !appointment.IsReserved)
             {
-                DateTime selectedDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, day);
+                appointment.Reserve();
+                appointment.customer = customer;
+                appointment.pet = pet;
+                appointment.veterinarian = veterinarian;
 
-                // Mostrar las horas disponibles para el día seleccionado
-                ShowAvailableAppointmentsForDay(selectedDate);
+                // Aquí debes llamar a tu método que actualiza la cita en la base de datos real
+                // Ejemplo:
+                // Database.UpdateAppointment(appointment);
+
+                return true;
             }
-            else
-            {
-                Console.WriteLine("Invalid day. Please enter a valid day.");
-            }
+
+            return false;
         }
 
-        // Método para mostrar las horas disponibles para un día específico
-        private void ShowAvailableAppointmentsForDay(DateTime selectedDate)
+        // Obtener citas reservadas
+        public List<Appointment> GetReservedAppointments()
         {
-            // Obtener las citas disponibles para el día seleccionado
-            var availableAppointments = appointmentSystem.GetAvailableAppointments(selectedDate);
+            return Warehouse.appointments.Where(a => a.IsReserved).ToList();
+        }
 
-            // Si hay citas disponibles, mostrarlas
-            if (availableAppointments.Any())
-            {
-                Console.WriteLine($"\nAvailable appointments for {selectedDate:dddd, MMM dd, yyyy}:");
-
-                foreach (var appointment in availableAppointments)
-                {
-                    Console.WriteLine($"  {appointment.DateAndTime:HH:mm}");
-                }
-
-                // Permitir que el usuario seleccione una hora para reservar
-                Console.WriteLine("\nEnter a time (HH:mm) to reserve:");
-                string timeInput = Console.ReadLine() ?? "";
-
-                if (DateTime.TryParseExact(timeInput, "HH:mm", null, System.Globalization.DateTimeStyles.None, out DateTime time))
-                {
-                    DateTime appointmentTime = selectedDate.Date.Add(time.TimeOfDay);
-
-                    bool isReserved = appointmentSystem.ReserveAppointment(appointmentTime);
-                    if (isReserved)
-                    {
-                        Console.WriteLine("Your appointment has been successfully reserved.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Sorry, the selected appointment time is unavailable.");
-                    }
-                }
-                else
-                {
-                    VisualInterface.RedColor("Invalid time format.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("No available appointments for this day.");
-            }
+        // Obtener citas disponibles en un día específico
+        public List<Appointment> GetAvailableAppointments(DateTime date)
+        {
+            return Warehouse.appointments.Where(a => a.DateAndTime.Date == date.Date && !a.IsReserved).ToList();
         }
     }
 }

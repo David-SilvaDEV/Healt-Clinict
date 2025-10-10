@@ -1,56 +1,158 @@
+using System;
+using System.Linq;
+using Healt_Clinict.database;
+using Healt_Clinict.Models;
+using Healt_Clinict.obj.Models;
+using Healt_Clinict.Utils;
+using Microsoft.VisualBasic;
+
+
 namespace Healt_Clinict.ClassesSupport
 {
-    public class AppointmentSystem
-    {
-        private List<Appointment> appointments = new List<Appointment>();
+    public class ReservationsSystem
+        
+    {    
+        
+        private AppointmentSystem appointmentSystem = new AppointmentSystem();
 
-        // Método para generar citas para un mes y año específicos
-        public void GenerateAppointments(int month, int year)
+        public ReservationsSystem()
         {
-            DateTime startDate = new DateTime(year, month, 1);
-            int daysInMonth = DateTime.DaysInMonth(year, month);
+            int currentYear = DateTime.Now.Year;
 
-            // Rango de horas: 8 AM a 5 PM con intervalos de 30 minutos
-            for (int day = 1; day <= daysInMonth; day++)
+            Console.WriteLine("Enter the month (MM) to display available appointments:");
+            string monthInput = Console.ReadLine() ?? "";
+            int month;
+
+            if (int.TryParse(monthInput, out month) && month >= 1 && month <= 12)
             {
-                for (int hour = 8; hour <= 17; hour++)  // De 8 AM a 5 PM
+                appointmentSystem.GenerateAppointments(month, currentYear);
+                AppointmentCalendar calendar = new AppointmentCalendar(appointmentSystem);
+
+                Console.WriteLine($"\nDisplaying calendar for {new DateTime(currentYear, month, 1):MMMM yyyy}:\n");
+                calendar.DisplayCalendar(month, currentYear);
+
+                AskForDay(month, currentYear);
+            }
+            else
+            {
+                Console.WriteLine("Invalid month. Please enter a valid month (1-12).");
+            }
+        }
+
+        private void AskForDay(int month, int year)
+        {
+            Console.WriteLine("\nEnter the day (DD) to view available appointments:");
+            string dayInput = Console.ReadLine() ?? "";
+            int day;
+
+            if (int.TryParse(dayInput, out day) && day >= 1 && day <= DateTime.DaysInMonth(year, month))
+            {
+                DateTime selectedDate = new DateTime(year, month, day);
+                ShowAvailableAppointmentsForDay(selectedDate);
+            }
+            else
+            {
+                Console.WriteLine("Invalid day. Please enter a valid day.");
+            }
+        }
+
+        private void ShowAvailableAppointmentsForDay(DateTime selectedDate)
+        {
+            var availableAppointments = appointmentSystem.GetAvailableAppointments(selectedDate);
+
+            if (availableAppointments.Any())
+            {
+                Console.WriteLine($"\nAvailable appointments for {selectedDate:dddd, MMM dd, yyyy}:");
+
+                foreach (var appointment in availableAppointments)
                 {
-                    for (int minute = 0; minute < 60; minute += 30)  // Intervalos de 30 minutos
+                    Console.WriteLine($"  {appointment.DateAndTime:HH:mm}");
+                }
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+                Console.WriteLine("\nEnter a time (HH:mm) to reserve:");
+                string timeInput = Console.ReadLine() ?? "";
+
+                if (DateTime.TryParseExact(timeInput, "HH:mm", null, System.Globalization.DateTimeStyles.None, out DateTime time))
+                {
+                    DateTime appointmentTime = selectedDate.Date.Add(time.TimeOfDay);
+
+                    // Pedir datos del cliente
+                    Console.WriteLine("Enter customer name:");
+                    string customerName = Console.ReadLine() ?? "";
+
+                    Console.WriteLine("Enter customer document number:");
+                    string customerDoc = Console.ReadLine() ?? "";
+
+                    var customer = Warehouse.customers
+                        .FirstOrDefault(c => c.Name.Equals(customerName, StringComparison.OrdinalIgnoreCase)
+                                            && c.NumberDocument == customerDoc);
+
+                    if (customer == null)
                     {
-                        DateTime dateTime = new DateTime(year, month, day, hour, minute, 0);
-                        appointments.Add(new Appointment(dateTime));
+                        VisualInterface.GreenColor("[X] Customer not found (*-*).");
+                        return;
+                    }
+
+                    if (customer.Pets == null || customer.Pets.Count == 0)
+                    {
+                        VisualInterface.GreenColor(" [X] Customer has no pets registered (-_*).");
+                        return;
+                    }
+
+                    Console.WriteLine("Select a pet:");
+                    for (int i = 0; i < customer.Pets.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {customer.Pets[i].Name}");
+                    }
+
+                    if (!int.TryParse(Console.ReadLine(), out int petIndex) || petIndex < 1 || petIndex > customer.Pets.Count)
+                    {
+                        Console.WriteLine("Invalid pet selection.");
+                        return;
+                    }
+                    var pet = customer.Pets[petIndex - 1];
+
+                    if (Warehouse.veterinarians.Count == 0)
+                    {
+                        Console.WriteLine("No veterinarians available.");
+                        return;
+                    }
+
+                    Console.WriteLine("Select a veterinarian:");
+                    for (int i = 0; i < Warehouse.veterinarians.Count; i++)
+                    {
+                        var vet = Warehouse.veterinarians[i];
+                        Console.WriteLine($"{i + 1}. {vet.Name} {vet.LastName}");
+                    }
+
+                    if (!int.TryParse(Console.ReadLine(), out int vetIndex) || vetIndex < 1 || vetIndex > Warehouse.veterinarians.Count)
+                    {
+                        Console.WriteLine("Invalid veterinarian selection.");
+                        return;
+                    }
+                    var veterinarian = Warehouse.veterinarians[vetIndex - 1];
+
+                    // Reservar cita con todos los datos
+                    bool isReserved = appointmentSystem.ReserveAppointment(appointmentTime, customer, pet, veterinarian);
+
+                    if (isReserved)
+                    {
+                        VisualInterface.GreenColor("Your appointment has been successfully reserved.");
+                    }
+                    else
+                    {
+                        VisualInterface.RedColor("Sorry, the selected appointment time is unavailable.");
                     }
                 }
+                else
+                {
+                    Console.WriteLine("Invalid time format.");
+                }
             }
-        }
-
-        // Método para reservar una cita
-        public bool ReserveAppointment(DateTime dateTime)
-        {
-            var appointment = appointments.FirstOrDefault(a => a.DateAndTime == dateTime);
-            if (appointment != null && !appointment.IsReserved)
+            else
             {
-                appointment.Reserve();
-                return true;
+                Console.WriteLine("No available appointments for this day.");
             }
-            return false;
-        }
-
-        // Método para obtener todas las citas reservadas
-        public List<Appointment> GetReservedAppointments()
-        {
-            return appointments.Where(a => a.IsReserved).ToList();
-        }
-
-        // Método para obtener todas las citas disponibles en un día específico
-        public List<Appointment> GetAvailableAppointments(DateTime date)
-        {
-            return appointments.Where(a => a.DateAndTime.Date == date.Date && !a.IsReserved).ToList();
-        }
-
-        public AppointmentSystem()
-        {
-            // Inicialización del sistema de citas
         }
     }
 }

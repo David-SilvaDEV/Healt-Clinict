@@ -52,4 +52,17 @@ public static class VisualInterface
         // Restaura el color predeterminado
         Console.ResetColor();
     }
+
+    public static void Animation(string carga)
+    {
+         
+        Console.Clear();
+        // 
+        foreach (char c in carga)
+        {
+            Console.Write(c);
+            Thread.Sleep(100); // P milisegundos
+        }
+        Console.WriteLine("");
+    }
 }

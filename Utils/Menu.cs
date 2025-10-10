@@ -3,17 +3,28 @@ using System.Collections.Generic;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
+using Healt_Clinict.ClassesSupport;
 using Healt_Clinict.Services;
+
+
 
 namespace Healt_Clinict.Utils;
 
 public class Menu
 {
+    private AppointmentSystem appointmentSystem = new AppointmentSystem();
+    private AppointmentServices appointmentServices;
+
+    private VeterinarianServices veterinarianServices = new VeterinarianServices();
+    private CustomerServices customerServices = new CustomerServices();
+    private PetServices petServices = new PetServices();
+
     
-    VeterinarianServices veterinarianServices = new VeterinarianServices();
-    CustomerServices customerServices = new();
-    PetServices petServices = new PetServices();
-    public void MainMenu()
+    
+    public Menu()
+    {
+        appointmentServices = new AppointmentServices(appointmentSystem);
+    }    public void MainMenu()
     {
 
         {
@@ -23,7 +34,8 @@ public class Menu
             Console.WriteLine("[1] Customer");
             Console.WriteLine("[2] pets");
             Console.WriteLine("[3] Employees");
-            Console.WriteLine("[4] Exis");
+            Console.WriteLine("[4] Appointment");
+            Console.WriteLine("[5] Exis");
 
             string answer = Console.ReadLine() ?? "";
             switch (answer)
@@ -38,6 +50,9 @@ public class Menu
                     EmployeeMenu();
                     break;
                 case "4":
+                    AppointmentMenu();
+                    break;
+                case "5":
                     Console.WriteLine("Exiting the program. Goodbye!");
                     return;
                 default:
@@ -207,6 +222,45 @@ public class Menu
                 break;
             case "4":
                 veterinarianServices.DeleteVeterinarian();
+
+                break;
+            case "5":
+                MainMenu();
+                break;
+            default:
+                ServicesValidation.ReturnToMenu();
+                break;
+        }
+
+    }
+
+    public void AppointmentMenu()
+    {   VisualInterface.Interface("Appointment Menu ");
+        Console.WriteLine("[1] -create new appointment");
+        Console.WriteLine("[2] -see appointment");
+        Console.WriteLine("[3] -Update appointment information");
+        Console.WriteLine("[4] -Delete appointment");
+        Console.WriteLine("[5] -Return to main menu");
+
+        string answer = Console.ReadLine() ?? "";
+        switch (answer)
+        {
+            case "1":
+
+                appointmentServices.CreateAppointmentMenu();
+
+                break;
+            case "2":
+
+
+                Appointment.ShowReservedAppointments();
+                break;
+            case "3":
+               
+
+                break;
+            case "4":
+                
 
                 break;
             case "5":
