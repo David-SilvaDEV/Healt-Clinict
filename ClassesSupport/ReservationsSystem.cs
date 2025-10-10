@@ -12,13 +12,13 @@ namespace Healt_Clinict.ClassesSupport
 {
     public class AppointmentSystem
     {
-        // Suponemos Warehouse.appointments es tu "base de datos" en memoria
+       
         public AppointmentSystem()
         {
-            // Opcional: cargar citas desde base de datos si tienes persistencia real
+            
         }
 
-        // Generar citas para un mes y año específicos y guardar en base de datos
+        
         public void GenerateAppointments(int month, int year)
         {
             int daysInMonth = DateTime.DaysInMonth(year, month);
@@ -55,9 +55,6 @@ namespace Healt_Clinict.ClassesSupport
                 appointment.pet = pet;
                 appointment.veterinarian = veterinarian;
 
-                // Aquí debes llamar a tu método que actualiza la cita en la base de datos real
-                // Ejemplo:
-                // Database.UpdateAppointment(appointment);
 
                 return true;
             }
